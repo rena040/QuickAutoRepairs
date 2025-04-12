@@ -1,0 +1,10 @@
+CSH001:Alice Johnson:40.0:18.0
+CSH002:Bob Williams:35.0:17.0
+CSH003:Carol Jones:30.0:16.5
+CSH004:Dan Garcia:25.0:16.0
+CSH005:Eve Martinez:20.0:15.5
+CSH006:Frank Davis:40.0:18.5
+CSH007:Grace Rodriguez:35.0:17.5
+CSH008:Henry Wilson:30.0:16.0
+CSH009:Ivy Anderson:25.0:15.0
+CSH010:Jack Thomas:20.0:15.0

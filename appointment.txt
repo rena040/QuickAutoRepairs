@@ -1,0 +1,10 @@
+APT001:C001:M001:Toyota Camry:2025-04-10:Completed:0.0:true
+APT002:C002:M002:Honda Civic:2025-04-16:Scheduled:0.0:false
+APT003:C003:M003:Ford F-150:2025-04-08:Completed:0.0:true
+APT004:C004:M004:Chevrolet Silverado:2025-04-02:Completed:0.0:true
+APT005:C005:M005:Nissan Altima:2025-05-09:Scheduled:0.0:false
+APT006:C006:M006:BMW 3 Series:2025-04-10:Completed:0.0:true
+APT007:C007:M007:Mercedes C-Class:2025-04-08:Completed:0.0:true
+APT008:C008:M008:Audi A4:2025-04-16:Scheduled:0.0:false
+APT009:C009:M009:Tesla Model 3:2025-04-02:Completed:0.0:true
+APT010:C010:M010:Jeep Wrangler:2025-05-09:Scheduled:0.0:false

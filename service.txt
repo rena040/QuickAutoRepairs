@@ -1,0 +1,10 @@
+SRV001:Oil Change:Regular oil change service:1744258110162:M001:P001-1,P002-1
+SRV002:Brake Service:Front brake pad replacement:1744258110162:M004:P004-2
+SRV003:Battery Replacement:Car battery replacement:1744258110162:M003:P005-1
+SRV004:Tire Rotation:Tire rotation and balance:1744258110162:M005:
+SRV005:Spark Plug Replacement:Replace all spark plugs:1744258110162:M001:P003-4
+SRV006:AC Service:AC system recharge:1744258110162:M007:
+SRV007:Windshield Wiper Replacement:Replace both wipers:1744258110162:M005:P006-2
+SRV008:Headlight Replacement:Replace headlight bulb:1744258110162:M003:P008-1
+SRV009:Radiator Flush:Coolant flush and replacement:1744258110162:M001:P009-1
+SRV010:Alternator Replacement:Replace alternator:1744258110163:M002:P010-1
