@@ -1,0 +1,10 @@
+M001:Mike Jones:Engine:40:20.0
+M002:Sarah Lee:Brakes:35:25.0
+M003:Tom Brown:Transmission:38:22.0
+M004:Emma Wilson:Suspension:37:24.0
+M005:James Smith:Electrical:39:21.0
+M006:Lily Davis:AC Systems:36:23.0
+M007:Ryan Taylor:Exhaust:38:22.5
+M008:Chloe Martin:Diagnostics:40:26.0
+M009:Ethan Anderson:Hybrid Systems:35:24.5
+M010:Zoe Clark:General Maintenance:37:20.5

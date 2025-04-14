@@ -1,0 +1,10 @@
+PRT001:Oil Filter:10.0:50:AutoParts Inc
+PRT002:Air Filter:15.0:30:AutoParts Inc
+PRT003:Brake Pads:60.0:25:BrakeCo
+PRT004:Spark Plug:8.0:100:SparkInc
+PRT005:Windshield Wiper:12.0:75:RainTech
+PRT006:Battery:120.0:20:PowerCell
+PRT007:Timing Belt:45.0:40:BeltMasters
+PRT008:Oxygen Sensor:85.0:30:SensorPro
+PRT009:Fuel Pump:95.0:25:FlowTech
+PRT010:Shock Absorber:75.0:35:SuspensionPlus
