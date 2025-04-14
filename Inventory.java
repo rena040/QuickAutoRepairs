@@ -33,18 +33,52 @@ class Inventory {
         parts.add(part);
         writeToFile(); // Append the new part to file
     }
-
+    
     public void removePart(Part part) {
         parts.remove(part);
         writeToFile(); // Rewrite parts to file after removal
+    }
+
+    public Part findPart(String identifier) {
+        readData(inventoryFile); // Refresh data from file
+        for (Part part : parts) {
+            if (part.getPartId().equalsIgnoreCase(identifier) || 
+                part.getName().equalsIgnoreCase(identifier)) {
+                return part;
+            }
+        }
+        return null;
+    }
+
+
+    public boolean removeParts(String partId, int quantity) {
+        Part part = findPart(partId);
+        if (part == null) {
+            System.out.println("Part not found: " + partId);
+            return false;
+        }
+        
+        if (part.getQuantityInStock() < quantity) {
+            System.out.println("Insufficient quantity for part: " + part.getName() + 
+                             " (Available: " + part.getQuantityInStock() + 
+                             ", Requested: " + quantity + ")");
+            return false;
+        }
+        
+        part.setQuantityInStock(part.getQuantityInStock() - quantity);
+        updateInventoryFile();
+        return true;
     }
 
     // Method to read existing parts data from file
     public void readData(File filename) {
         try (Scanner partFile = new Scanner(filename)) {
             while (partFile.hasNext()) {
-                String data = partFile.nextLine();
-                parts.add(Part.fromString(data)); // Create Part object from file line
+                String[] data = partFile.nextLine().split(":");
+                // Create Part object directly from parsed data
+                Part p = new Part(data[0], data[1], Double.parseDouble(data[2]), 
+                                 Integer.parseInt(data[3]), data[4]);
+                parts.add(p);
             }
         } catch (IOException ioe) {
             // Handle error if file reading fails
@@ -102,16 +136,8 @@ class Inventory {
         return partList; // Return the list of parts
     }
 
-    public Part findPart(String identifier) {
-        for (Part part : parts) {
-            // Assuming Part has getName() and getId() methods
-            if (part.getName().equalsIgnoreCase(identifier) || part.getPartId().equals(identifier)) {
-                return part; // Return the found part
-            }
-        }
-        System.out.println("Part not found: " + identifier);
-        return null; // Return null if part not found
-    }
+    
+
 
     public void updateInventoryFile() {
         try (PrintWriter pw = new PrintWriter(new FileWriter(inventoryFile, false))) { // false = overwrite

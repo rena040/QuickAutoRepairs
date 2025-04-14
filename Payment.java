@@ -221,6 +221,11 @@ class Payment {
         PaymentProcessor processor = new PaymentProcessor();
         return processor.getCustomerById(customerId);
     }
+
+    public Appointment getAppointmentById(String appointmentId) {
+        PaymentProcessor processor = new PaymentProcessor();
+        return processor.getAppointmentById(appointmentId);
+    }
 }
 
 class PaymentProcessor {
@@ -359,6 +364,16 @@ public Payment processAppointmentPayment(Appointment appointment, String cashier
         for (Customer customer : customerManager.customersList) {
             if (customer.getCustomerId().equals(customerId)) {
                 return customer;
+            }
+        }
+        return null;
+    }
+    public Appointment getAppointmentById(String appointmentId) {
+        // Implement logic to find and return appointment by ID
+        // This should read from your appointment data file
+        for (Appointment appointment : appointmentManager.appointments) {
+            if (appointment.getAppointmentId().equals(appointmentId)) {
+                return appointment;
             }
         }
         return null;

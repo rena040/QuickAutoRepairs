@@ -1,10 +1,20 @@
-APT001:C001:M001:Toyota Camry:2025-04-10:Completed:0.0:true
-APT002:C002:M002:Honda Civic:2025-04-16:Scheduled:0.0:false
-APT003:C003:M003:Ford F-150:2025-04-08:Completed:0.0:true
-APT004:C004:M004:Chevrolet Silverado:2025-04-02:Completed:0.0:true
-APT005:C005:M005:Nissan Altima:2025-05-09:Scheduled:0.0:false
-APT006:C006:M006:BMW 3 Series:2025-04-10:Completed:0.0:true
-APT007:C007:M007:Mercedes C-Class:2025-04-08:Completed:0.0:true
-APT008:C008:M008:Audi A4:2025-04-16:Scheduled:0.0:false
-APT009:C009:M009:Tesla Model 3:2025-04-02:Completed:0.0:true
-APT010:C010:M010:Jeep Wrangler:2025-05-09:Scheduled:0.0:false
+APT001:CST001:M001:Toyota Camry:2025-03-15:Oil Change:Completed:85.0:true
+APT002:CST002:M002:Honda Civic:2025-03-20:Tire Rotation:Completed:120.0:true
+APT003:CST003:M003:Ford Focus:2025-04-01:Brake Inspection:Completed:150.0:true
+APT004:CST004:M004:Chevrolet Malibu:2025-04-05:Battery Replacement:Completed:200.0:true
+APT005:CST005:M005:Nissan Altima:2025-04-15:Engine Diagnostics:Scheduled:90.0:false
+APT006:CST006:M001:Hyundai Ioniq:2025-04-20:Transmission Repair:In Progress:180.0:false
+APT007:CST007:M002:Kia EV9:2025-04-25:Suspension Check:Scheduled:220.0:false
+APT008:CST008:M003:VW ID.4:2025-05-01:AC Service:Scheduled:160.0:false
+APT009:CST009:M004:Subaru Solterra:2025-05-05:Exhaust Repair:Scheduled:250.0:false
+APT010:CST010:M005:Mazda CX-90:2025-05-10:Hybrid System Check:Scheduled:300.0:false
+APT011:CST001:M006:Toyota bZ4X:2025-05-15:General Maintenance:Scheduled:170.0:false
+APT012:CST002:M007:Honda Prologue:2025-05-20:Oil Change:In Progress:210.0:false
+APT013:CST003:M008:Ford F-150 Lightning:2025-06-01:Brake Replacement:Scheduled:190.0:false
+APT014:CST004:M009:Chevrolet Blazer EV:2025-06-05:Battery Replacement:Scheduled:400.0:false
+APT015:CST005:M010:Nissan Ariya:2025-06-10:Engine Diagnostics:Scheduled:280.0:false
+APT016:CST006:M006:Hyundai Kona Electric:2025-06-15:Suspension Check:Scheduled:320.0:false
+APT017:CST007:M007:Kia Niro EV:2025-06-20:AC Service:Scheduled:350.0:false
+APT018:CST008:M008:VW ID.Buzz:2025-07-01:Exhaust Repair:Scheduled:380.0:false
+APT019:CST009:M009:Subaru Ascent:2025-07-05:Hybrid System Check:Scheduled:270.0:false
+APT020:CST010:M010:Mazda MX-30:2025-07-10:General Maintenance:Scheduled:420.0:false

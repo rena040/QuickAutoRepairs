@@ -1,10 +1,10 @@
-SRV001:Oil Change:Regular oil change service:1744258110162:M001:P001-1,P002-1
-SRV002:Brake Service:Front brake pad replacement:1744258110162:M004:P004-2
-SRV003:Battery Replacement:Car battery replacement:1744258110162:M003:P005-1
-SRV004:Tire Rotation:Tire rotation and balance:1744258110162:M005:
-SRV005:Spark Plug Replacement:Replace all spark plugs:1744258110162:M001:P003-4
-SRV006:AC Service:AC system recharge:1744258110162:M007:
-SRV007:Windshield Wiper Replacement:Replace both wipers:1744258110162:M005:P006-2
-SRV008:Headlight Replacement:Replace headlight bulb:1744258110162:M003:P008-1
-SRV009:Radiator Flush:Coolant flush and replacement:1744258110162:M001:P009-1
-SRV010:Alternator Replacement:Replace alternator:1744258110163:M002:P010-1
+SRV001:Oil Change:PRT001-1,PRT002-1:Standard Oil Change:1673845200000:M001
+SRV002:Brake Replacement:PRT003-2:Brake System Overhaul:1673931600000:M002
+SRV003:Tune Up:PRT004-4:Engine Tune Up:1670846232704:M003
+SRV004:Battery Replacement:PRT006-1:Battery Installation:1672142232704:M004
+SRV005:Wiper Replacement:PRT005-2:Wiper Blade Change:1673438232704:M005
+SRV006:Timing Belt Change:PRT007-1:Timing Belt Service:1670439265408:M006
+SRV007:Sensor Replacement:PRT008-2:O2 Sensor Change:1671735265408:M007
+SRV08:Fuel System Service:PRT009-1:Fuel Pump Replacement:1673031265408:M008
+SRV09:Suspension Repair:PRT010-2:Shock Absorber Change:1674327265408:M009
+SRV10:AC Service:PRT002-1,PRT005-1:AC System Maintenance:1671328298112:M010
