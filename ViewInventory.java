@@ -22,9 +22,24 @@ public class ViewInventory extends javax.swing.JFrame {
 
     public ViewInventory() {
         initComponents();
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
         inventory = new Inventory("Main Storage", "parts.txt");
         partList = inventory.viewAllParts(); // Load parts from file
         updateTable();
+    }
+
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(jButton1);
+
+        // Style table
+        jTable1.setFont(UIStyle.LABEL_FONT);
+        jTable1.getTableHeader().setFont(UIStyle.LABEL_FONT);
     }
 
     private void updateTable() {

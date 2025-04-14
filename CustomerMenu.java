@@ -17,6 +17,19 @@ public class CustomerMenu extends javax.swing.JFrame {
      */
     public CustomerMenu() {
         initComponents();
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
+    }
+
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(bookappointment);
+        UIStyle.styleButton(jButton1);
+        UIStyle.styleButton(jButton2);
     }
 
     /**
@@ -117,23 +130,38 @@ public class CustomerMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_bookappointmentActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // Search for appointments by customer ID
         List<Appointment> matchedAppointments = new ArrayList<>();
         Appointment ap = new Appointment();
         matchedAppointments = ap.searchAppointmentsByCustomerId(customerId);
 
         if (matchedAppointments.isEmpty()) {
-            // System.out.println("No upcoming appointments found.");
+            // Show a message if no appointments are found
             javax.swing.JOptionPane.showMessageDialog(this, "No upcoming appointments found.");
         } else {
-            System.out.println("Upcoming Appointments:");
-            javax.swing.JOptionPane.showMessageDialog(this, "Upcoming Appointments:");
-            javax.swing.JOptionPane.showMessageDialog(this, "You have " + matchedAppointments.size() + " upcoming appointments.");
+            // Build a formatted string for all appointments
+            StringBuilder appointmentDetails = new StringBuilder();
+            appointmentDetails.append("You have ").append(matchedAppointments.size()).append(" upcoming appointments:\n\n");
+
             for (Appointment appointment : matchedAppointments) {
-                javax.swing.JOptionPane.showMessageDialog(this,appointment);
+                if (appointment.getStatus().equals("Completed")) {
+                    continue; // Skip completed appointments
+                }
+                appointmentDetails.append("Appointment ID: ").append(appointment.getAppointmentId()).append("\n")
+                                  .append("Customer ID: ").append(appointment.getCustomerId()).append("\n")
+                                  .append("Mechanic ID: ").append(appointment.getMechanicId()).append("\n")
+                                  .append("Vehicle Name: ").append(appointment.getVehicleName()).append("\n")
+                                  .append("Appointment Date: ").append(appointment.getAppointmentDate()).append("\n")
+                                  .append("Service: ").append(appointment.getService()).append("\n")
+                                  .append("Status: ").append(appointment.getStatus()).append("\n")
+                                  .append("Paid: ").append(appointment.isPaid() ? "Yes" : "No").append("\n")
+                                  .append("Draft Amount: $").append(String.format("%.2f", appointment.getDraft())).append("\n")
+                                  .append("----------------------------------------\n");
             }
+
+            // Display all appointment details in a single dialog box
+            javax.swing.JOptionPane.showMessageDialog(this, appointmentDetails.toString(), "Upcoming Appointments", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -105,7 +105,41 @@ public class PaymentProcessing extends javax.swing.JFrame {
      */
     public PaymentProcessing() {
         initComponents();
-        this.paymentHandler = new Payment();
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
+    }
+
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(jButton1);
+        UIStyle.styleButton(jButton2);
+        UIStyle.styleButton(selectAppoint);
+        UIStyle.styleButton(backbutton);
+
+        // Style labels
+        jLabel1.setFont(UIStyle.LABEL_FONT);
+        jLabel2.setFont(UIStyle.LABEL_FONT);
+        jLabel3.setFont(UIStyle.LABEL_FONT);
+        jLabel4.setFont(UIStyle.LABEL_FONT);
+        jLabel5.setFont(UIStyle.LABEL_FONT);
+        jLabel6.setFont(UIStyle.LABEL_FONT);
+        jLabel7.setFont(UIStyle.LABEL_FONT);
+
+        // Style text fields
+        searchField.setFont(UIStyle.LABEL_FONT);
+        txtAppointmentId.setFont(UIStyle.LABEL_FONT);
+        txtCustomerId.setFont(UIStyle.LABEL_FONT);
+        txtAmount.setFont(UIStyle.LABEL_FONT);
+        txtVehicle.setFont(UIStyle.LABEL_FONT);
+        txtCashierId.setFont(UIStyle.LABEL_FONT);
+
+        // Style table
+        appointmentTable.setFont(UIStyle.LABEL_FONT);
+        appointmentTable.getTableHeader().setFont(UIStyle.LABEL_FONT);
     }
 
     /**

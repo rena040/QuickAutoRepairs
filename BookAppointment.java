@@ -14,8 +14,6 @@ import javax.swing.JOptionPane;
  * @author rosha
  */
 
-
-
 public class BookAppointment extends javax.swing.JFrame {
 
     private String customerId; 
@@ -51,19 +49,36 @@ public class BookAppointment extends javax.swing.JFrame {
      */
     public BookAppointment() {
         initComponents();
-        // Set the appointment ID automatically in APT001 format
-        AppID.setText(Appointment.generateNextAppointmentId());
-        AppID.setEditable(false); // Make it read-only
-        
-        Mechanic.loadMechanics();
-        mechanicList = Mechanic.getAllMechanics();
-    
-        mechanic.removeAllItems();
-        for (Mechanic m : mechanicList) {
-            mechanic.addItem(m.getName() + " (" + m.getMechanicId() + ")");
-        }
-        loadServices();
-        
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
+    }
+
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(jButton1);
+        UIStyle.styleButton(jButton2);
+
+        // Style labels
+        jLabel1.setFont(UIStyle.LABEL_FONT);
+        jLabel2.setFont(UIStyle.LABEL_FONT);
+        jLabel3.setFont(UIStyle.LABEL_FONT);
+        jLabel4.setFont(UIStyle.LABEL_FONT);
+        jLabel5.setFont(UIStyle.LABEL_FONT);
+        jLabel6.setFont(UIStyle.LABEL_FONT);
+
+        // Style text fields
+        custId.setFont(UIStyle.LABEL_FONT);
+        AppID.setFont(UIStyle.LABEL_FONT);
+        AppDate.setFont(UIStyle.LABEL_FONT);
+        vehicle.setFont(UIStyle.LABEL_FONT);
+
+        // Style combo boxes
+        mechanic.setFont(UIStyle.LABEL_FONT);
+        services.setFont(UIStyle.LABEL_FONT);
     }
 
     /**

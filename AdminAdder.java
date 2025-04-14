@@ -14,6 +14,25 @@ public class AdminAdder extends javax.swing.JFrame {
      */
     public AdminAdder() {
         initComponents();
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
+    }
+
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(create);
+
+        // Style labels
+        jLabel1.setFont(UIStyle.LABEL_FONT);
+        jLabel2.setFont(UIStyle.LABEL_FONT);
+
+        // Style text fields
+        adminID.setFont(UIStyle.LABEL_FONT);
+        adminName.setFont(UIStyle.LABEL_FONT);
     }
 
     /**

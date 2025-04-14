@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +19,22 @@ public class EmployeeManager extends javax.swing.JFrame {
      */
     public EmployeeManager() {
         initComponents();
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
+    }
+
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(jButton1);
+        UIStyle.styleButton(jButton2);
+        UIStyle.styleButton(hourlRate);
+        UIStyle.styleButton(jButton3);
+        UIStyle.styleButton(jButton4);
+        UIStyle.styleButton(jButton5);
     }
 
     /**

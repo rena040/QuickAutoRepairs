@@ -14,6 +14,22 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        applyStyles();
+        pack(); // Automatically set the size based on the content
+        setLocationRelativeTo(null); // Center the window on the screen
+    }
+
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(jButton1);
+        UIStyle.styleButton(jButton2);
+
+        // Style labels
+        jLabel1.setFont(UIStyle.LABEL_FONT);
+        jLabel2.setFont(UIStyle.LABEL_FONT);
     }
 
     /**
@@ -34,29 +50,15 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(51, 102, 255));
-
         jLabel1.setText("Customer ID");
 
         jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jButton1.addActionListener(evt -> jButton1ActionPerformed(evt));
 
         jLabel2.setText("Don't have an account?");
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jButton2.setText("Register Now");
-        jButton2.setBorder(null);
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        jButton2.addActionListener(evt -> jButton2ActionPerformed(evt));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -65,15 +67,14 @@ public class Login extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField1)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
+                    .addComponent(jTextField1)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)))
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,112 +92,102 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
+        getContentPane().add(jPanel1);
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String enteredId = jTextField1.getText().trim();
-    boolean found = false;
+        boolean found = false;
 
-    try {
-        // Check customer.txt
-        java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader("customer.txt"));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            String[] parts = line.split(":");
-            if (parts.length > 0 && parts[0].equalsIgnoreCase(enteredId)) {
-                found = true;
-                javax.swing.JOptionPane.showMessageDialog(this, "Access Granted: Customer (" + enteredId + ")");
-                CustomerMenu cm = new CustomerMenu();
-                cm.setCustomerId(enteredId);
-                cm.setVisible(true);
-                this.dispose(); // Close the login window
-                break;
-            }
-        }
-        reader.close();
-
-        if (!found) {
-            // Check admin.txt
-            reader = new java.io.BufferedReader(new java.io.FileReader("admin.txt"));
+        try {
+            // Check customer.txt
+            java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader("customer.txt"));
+            String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(":");
-                if (parts.length > 0 && parts[0].equals(enteredId)) {
+                if (parts.length > 0 && parts[0].equalsIgnoreCase(enteredId)) {
                     found = true;
-                    javax.swing.JOptionPane.showMessageDialog(this, "Access Granted: Admin (" + enteredId + ")");
-                    AdminMenu cm = new AdminMenu();
+                    javax.swing.JOptionPane.showMessageDialog(this, "Access Granted: Customer (" + enteredId + ")");
+                    CustomerMenu cm = new CustomerMenu();
+                    cm.setCustomerId(enteredId);
                     cm.setVisible(true);
                     this.dispose(); // Close the login window
                     break;
                 }
             }
             reader.close();
-        }
 
-        if (!found) {
-            // Check cashier.txt
-            reader = new java.io.BufferedReader(new java.io.FileReader("cashier.txt"));
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(":");
-                if (parts.length > 0 && parts[0].equals(enteredId)) {
-                    found = true;
-                    javax.swing.JOptionPane.showMessageDialog(this, "Access Granted: Cashier (" + enteredId + ")");
-                    CashierMenu cm = new CashierMenu();
-                    cm.setCshID(enteredId);
-                    cm.setVisible(true);
-                    this.dispose(); // Close the login window
-                    break;
-                }
-            }
-            reader.close();
-        }
-
-        if (!found) {
-            // Check mechanics.txt
-            java.io.File mechanicFile = new java.io.File("mechanics.txt"); // Ensure the correct file name is used
-            if (mechanicFile.exists()) {
-                reader = new java.io.BufferedReader(new java.io.FileReader(mechanicFile));
+            if (!found) {
+                // Check admin.txt
+                reader = new java.io.BufferedReader(new java.io.FileReader("admin.txt"));
                 while ((line = reader.readLine()) != null) {
                     String[] parts = line.split(":");
-                    if (parts.length > 0 && parts[0].equalsIgnoreCase(enteredId)) {
+                    if (parts.length > 0 && parts[0].equals(enteredId)) {
                         found = true;
-                        javax.swing.JOptionPane.showMessageDialog(this, "Access Granted: Mechanic (" + enteredId + ")");
-                        MechViewAppointments cm = new MechViewAppointments();
-                        cm.setMechanicId(enteredId); // Pass the mechanic ID to filter appointments
-                        //cm.setMechanicId(enteredId);
+                        javax.swing.JOptionPane.showMessageDialog(this, "Access Granted: Admin (" + enteredId + ")");
+                        AdminMenu cm = new AdminMenu();
                         cm.setVisible(true);
-
                         this.dispose(); // Close the login window
                         break;
                     }
                 }
                 reader.close();
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "Mechanic file not found.");
             }
+
+            if (!found) {
+                // Check cashier.txt
+                reader = new java.io.BufferedReader(new java.io.FileReader("cashier.txt"));
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(":");
+                    if (parts.length > 0 && parts[0].equals(enteredId)) {
+                        found = true;
+                        javax.swing.JOptionPane.showMessageDialog(this, "Access Granted: Cashier (" + enteredId + ")");
+                        CashierMenu cm = new CashierMenu();
+                        cm.setCshID(enteredId);
+                        cm.setVisible(true);
+                        this.dispose(); // Close the login window
+                        break;
+                    }
+                }
+                reader.close();
+            }
+
+            if (!found) {
+                // Check mechanics.txt
+                java.io.File mechanicFile = new java.io.File("mechanics.txt"); // Ensure the correct file name is used
+                if (mechanicFile.exists()) {
+                    reader = new java.io.BufferedReader(new java.io.FileReader(mechanicFile));
+                    while ((line = reader.readLine()) != null) {
+                        String[] parts = line.split(":");
+                        if (parts.length > 0 && parts[0].equalsIgnoreCase(enteredId)) {
+                            found = true;
+                            javax.swing.JOptionPane.showMessageDialog(this, "Access Granted: Mechanic (" + enteredId + ")");
+                            MechViewAppointments cm = new MechViewAppointments();
+                            cm.setMechanicId(enteredId); // Pass the mechanic ID to filter appointments
+                            //cm.setMechanicId(enteredId);
+                            cm.setVisible(true);
+
+                            this.dispose(); // Close the login window
+                            break;
+                        }
+                    }
+                    reader.close();
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Mechanic file not found.");
+                }
+            }
+
+            if (!found) {
+                javax.swing.JOptionPane.showMessageDialog(this, "ID not found");
+            }
+
+        } catch (java.io.IOException ex) {
+            ex.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Error reading files.");
         }
 
-        if (!found) {
-            javax.swing.JOptionPane.showMessageDialog(this, "ID not found");
-        }
-
-    } catch (java.io.IOException ex) {
-        ex.printStackTrace();
-        javax.swing.JOptionPane.showMessageDialog(this, "Error reading files.");
-    }
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -234,11 +225,7 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> new Login().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

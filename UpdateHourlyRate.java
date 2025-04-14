@@ -14,6 +14,20 @@ public class UpdateHourlyRate extends javax.swing.JFrame {
      */
     public UpdateHourlyRate() {
         initComponents();
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
+    }
+
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(jButton1);
+
+        // Style text fields
+        jTextField1.setFont(UIStyle.LABEL_FONT);
     }
 
     /**

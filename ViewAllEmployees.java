@@ -18,9 +18,25 @@ public class ViewAllEmployees extends javax.swing.JFrame {
     /** Creates new form ViewAllEmployees */
     public ViewAllEmployees() {
         initComponents();
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
         adminManager = new Administrator("", "");
         loadEmployees();
     }
+
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(jButton1);
+
+        // Style table
+        jTable1.setFont(UIStyle.LABEL_FONT);
+        jTable1.getTableHeader().setFont(UIStyle.LABEL_FONT);
+    }
+
     private void loadEmployees() {
         // Load mechanics and administrators
         Mechanic.loadMechanics();

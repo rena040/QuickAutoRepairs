@@ -14,6 +14,32 @@ public class AddPart extends javax.swing.JFrame {
      */
     public AddPart() {
         initComponents();
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
+    }
+
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(addpart);
+        UIStyle.styleButton(jButton1);
+
+        // Style labels
+        jLabel1.setFont(UIStyle.LABEL_FONT);
+        jLabel2.setFont(UIStyle.LABEL_FONT);
+        jLabel3.setFont(UIStyle.LABEL_FONT);
+        jLabel4.setFont(UIStyle.LABEL_FONT);
+        jLabel5.setFont(UIStyle.LABEL_FONT);
+
+        // Style text fields
+        partID.setFont(UIStyle.LABEL_FONT);
+        name.setFont(UIStyle.LABEL_FONT);
+        price.setFont(UIStyle.LABEL_FONT);
+        quantity.setFont(UIStyle.LABEL_FONT);
+        supplier.setFont(UIStyle.LABEL_FONT);
     }
 
     /**
@@ -41,7 +67,7 @@ public class AddPart extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 204)); // Default background color
 
         jLabel1.setText("Part ID");
 
@@ -52,12 +78,6 @@ public class AddPart extends javax.swing.JFrame {
         jLabel4.setText("Quantity");
 
         jLabel5.setText("Supplier");
-
-        price.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                priceActionPerformed(evt);
-            }
-        });
 
         addpart.setText("Add Part");
         addpart.addActionListener(new java.awt.event.ActionListener() {

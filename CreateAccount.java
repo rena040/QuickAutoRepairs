@@ -1,5 +1,3 @@
-
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -18,9 +16,30 @@ public class CreateAccount extends javax.swing.JFrame {
      */
     public CreateAccount() {
         initComponents();
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
         custID.setText(Customer.generateNextCustomerId());
     }
 
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel2);
+
+        // Style buttons
+        UIStyle.styleButton(CreateAccount);
+        UIStyle.styleButton(jButton1);
+
+        // Style labels
+        jLabel5.setFont(UIStyle.LABEL_FONT);
+        jLabel6.setFont(UIStyle.LABEL_FONT);
+        jLabel7.setFont(UIStyle.LABEL_FONT);
+
+        // Style text fields
+        custID.setFont(UIStyle.LABEL_FONT);
+        custName.setFont(UIStyle.LABEL_FONT);
+        phoneNum.setFont(UIStyle.LABEL_FONT);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

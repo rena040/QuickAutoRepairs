@@ -15,6 +15,19 @@ public class CashierMenu extends javax.swing.JFrame {
      */
     public CashierMenu() {
         initComponents();
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
+    }
+
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(jButton1);
+        UIStyle.styleButton(jButton2);
+        UIStyle.styleButton(jButton3);
     }
 
     /**

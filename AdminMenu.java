@@ -14,6 +14,21 @@ public class AdminMenu extends javax.swing.JFrame {
      */
     public AdminMenu() {
         initComponents();
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
+    }
+
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(viewApps);
+        UIStyle.styleButton(jButton3);
+        UIStyle.styleButton(jButton6);
+        UIStyle.styleButton(jButton7);
+        UIStyle.styleButton(jButton2);
     }
 
     /**

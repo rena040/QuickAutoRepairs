@@ -17,9 +17,25 @@ public class ViewAppointments extends javax.swing.JFrame {
      */
     public ViewAppointments() {
         initComponents();
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
         appointmentManager = new Appointment();
         loadAppointments();
     }
+
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(jButton1);
+
+        // Style table
+        jTable1.setFont(UIStyle.LABEL_FONT);
+        jTable1.getTableHeader().setFont(UIStyle.LABEL_FONT);
+    }
+
     private void loadAppointments() {
         // Read appointments from the file
         appointmentManager.readData(appointmentManager.AFile);

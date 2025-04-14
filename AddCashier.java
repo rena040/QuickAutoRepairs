@@ -15,6 +15,21 @@ public class AddCashier extends javax.swing.JFrame {
     public AddCashier() {
         initComponents();
         cashID.setText(Cashier.generateNextCashierId());
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null);
+    }
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(jButton1);
+        UIStyle.styleButton(jButton2);
+
+        // Style labels
+        jLabel1.setFont(UIStyle.LABEL_FONT);
+        jLabel2.setFont(UIStyle.LABEL_FONT);
     }
 
     /**

@@ -24,6 +24,37 @@ public class UpdatePart extends javax.swing.JFrame {
      */
     public UpdatePart() {
         initComponents();
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
+    }
+
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(jButton1);
+        UIStyle.styleButton(jButton2);
+        UIStyle.styleButton(updatebtn);
+
+        // Style labels
+        jLabel1.setFont(UIStyle.LABEL_FONT);
+        jLabel2.setFont(UIStyle.LABEL_FONT);
+        jLabel3.setFont(UIStyle.LABEL_FONT);
+        jLabel4.setFont(UIStyle.LABEL_FONT);
+        jLabel13.setFont(UIStyle.LABEL_FONT);
+        jLabel14.setFont(UIStyle.LABEL_FONT);
+        jLabel15.setFont(UIStyle.LABEL_FONT);
+
+        // Style text fields
+        searchfield.setFont(UIStyle.LABEL_FONT);
+        currPrice.setFont(UIStyle.LABEL_FONT);
+        currStock.setFont(UIStyle.LABEL_FONT);
+        currSupp.setFont(UIStyle.LABEL_FONT);
+        newPrice.setFont(UIStyle.LABEL_FONT);
+        newStock.setFont(UIStyle.LABEL_FONT);
+        newSupp.setFont(UIStyle.LABEL_FONT);
     }
 
     /**

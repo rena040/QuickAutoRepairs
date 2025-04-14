@@ -20,11 +20,22 @@ public class MechViewAppointments extends javax.swing.JFrame {
      */
     public MechViewAppointments() {
         initComponents();
-        appointmentManager = new Appointment();
-        //loadMechanicAppointments(mechanicId);
-        setTitle("Appointments for Mechanic ID: " + mechanicId);
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
     }
 
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(jButton1);
+
+        // Style table
+        jTable1.setFont(UIStyle.LABEL_FONT);
+        jTable1.getTableHeader().setFont(UIStyle.LABEL_FONT);
+    }
 
     public void setMechanicId(String mechanicId) {
         // Load appointments for the specified mechanic

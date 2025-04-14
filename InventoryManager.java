@@ -14,6 +14,20 @@ public class InventoryManager extends javax.swing.JFrame {
      */
     public InventoryManager() {
         initComponents();
+        applyStyles();
+        pack();
+        setLocationRelativeTo(null); // Center the form on the screen
+    }
+
+    private void applyStyles() {
+        // Style the panel
+        UIStyle.stylePanel(jPanel1);
+
+        // Style buttons
+        UIStyle.styleButton(ViewInventory);
+        UIStyle.styleButton(updatePart);
+        UIStyle.styleButton(addPart);
+        UIStyle.styleButton(jButton1);
     }
 
     /**
