@@ -13,7 +13,6 @@ class LoyaltyCard {
         this.stamps = 0;
     }
 
-    // Getters and setters
     public String getCardId() { return cardId; }
     public String getCustomer() { return customer; }
     public String getDateIssued() { return dateIssued; }
@@ -24,12 +23,10 @@ class LoyaltyCard {
         this.discountAvailable = discountAvailable; 
     }
 
-    // Add a stamp to the loyalty card
     public void addStamp() {
         this.stamps++;
     }
 
-    // Check if card has enough stamps for discount
     public boolean hasEnoughStamps() {
         return this.stamps >= 8;
     }

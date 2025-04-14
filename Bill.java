@@ -2,7 +2,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
 
-// Bill class
 class Bill {
     private String billId;
     private Customer customer;
@@ -18,7 +17,6 @@ class Bill {
         this.paymentStatus = "Pending";
     }
 
-    // Getters and setters
     public String getBillId() { return billId; }
     public Customer getCustomer() { return customer; }
     public List<Service> getServices() { return services; }

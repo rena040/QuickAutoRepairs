@@ -12,11 +12,9 @@ class Cashier {
     private double workingHours;
     private double payRate;
 
-    // File for storing cashier data
     private static final File CASHIER_FILE = new File("cashier.txt");
     private static List<Cashier> cashiers = new ArrayList<>();
 
-    // Constructors
     public Cashier(String cashierId, String name, double workingHours, double payRate) {
         this.cashierId = cashierId;
         this.name = name;
@@ -26,7 +24,6 @@ class Cashier {
 
     public Cashier() {}
 
-    // Getters and setters
     public String getCashierId() { return cashierId; }
     public String getName() { return name; }
     public double getWorkingHours() { return workingHours; }
@@ -37,7 +34,6 @@ class Cashier {
     public void setWorkingHours(double workingHours) { this.workingHours = workingHours; }
     public void setPayRate(double payRate) { this.payRate = payRate; }
 
-    // Calculate weekly salary
     public double calculateWeeklySalary() {
         return workingHours * payRate;
     }
@@ -47,7 +43,6 @@ class Cashier {
         return cashierId + ":" + name + ":" + workingHours + ":" + payRate;
     }
 
-    // File operations
     public static void readData() {
         cashiers.clear();
         if (!CASHIER_FILE.exists()) return;
@@ -87,7 +82,6 @@ class Cashier {
         }
     }
 
-    // CRUD operations
     public void addCashier(Cashier cashier) {
         readData(); // Ensure we have current data
         cashiers.add(cashier);
@@ -135,7 +129,6 @@ class Cashier {
         return false;
     }
 
-    // ID generation similar to Appointment class
     public static String generateNextCashierId() {
         readData();
         int maxId = 0;
@@ -157,7 +150,6 @@ class Cashier {
         return String.format("CSH%03d", maxId + 1);
     }
 
-    // Additional utility methods
     public static double calculateTotalWeeklyPayroll() {
         readData();
         double total = 0;

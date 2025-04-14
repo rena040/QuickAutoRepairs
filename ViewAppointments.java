@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author rosha
+ * @author Nsaya Burrell, Karena Gayle, Justin Moo, Roshane Roach, Katelyn Tait, Tishawn Whyte 
  */
 public class ViewAppointments extends javax.swing.JFrame {
 
@@ -25,31 +25,29 @@ public class ViewAppointments extends javax.swing.JFrame {
     }
 
     private void applyStyles() {
-        // Style the panel
         UIStyle.stylePanel(jPanel1);
 
-        // Style buttons
         UIStyle.styleButton(jButton1);
 
-        // Style table
         jTable1.setFont(UIStyle.LABEL_FONT);
         jTable1.getTableHeader().setFont(UIStyle.LABEL_FONT);
+
+        jTable1.setShowGrid(true);
+        jTable1.setGridColor(java.awt.Color.BLACK); // Set grid color to black
     }
 
     private void loadAppointments() {
-        // Read appointments from the file
         appointmentManager.readData(appointmentManager.AFile);
 
-        // Create table model
         DefaultTableModel model = new DefaultTableModel(
             new Object[][]{},
             new String[]{
-                "Appointment ID", "Customer ID", "Mechanic ID", "Vehicle Name", 
-                "Appointment Date", "Service", "Status", "Paid", "Draft Amount"
+                "App ID", "Cust ID", "Mech ID", "Vehicle ", 
+                "AppDate", "App Time", "Service", "Status", "Paid", "Cost"
             }) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                if (columnIndex == 7) { // Paid column
+                if (columnIndex == 8) { // Paid column
                     return Boolean.class;
                 }
                 return String.class;
@@ -57,12 +55,10 @@ public class ViewAppointments extends javax.swing.JFrame {
 
             @Override
             public boolean isCellEditable(int row, int column) {
-                // Only allow editing of status and paid columns
-                return column == 6 || column == 7;
+                return column == 7 || column == 8;
             }
         };
 
-        // Add rows to the table model
         for (Appointment appointment : appointmentManager.appointments) {
             model.addRow(new Object[]{
                 appointment.getAppointmentId(),
@@ -70,7 +66,8 @@ public class ViewAppointments extends javax.swing.JFrame {
                 appointment.getMechanicId(),
                 appointment.getVehicleName(),
                 appointment.getAppointmentDate(),
-                appointment.getService(), // Add the service field here
+                appointment.getAppointmentTime(), // Add the time field here
+                appointment.getService(),
                 appointment.getStatus(),
                 appointment.isPaid(),
                 String.format("$%.2f", appointment.getDraft())
@@ -79,7 +76,6 @@ public class ViewAppointments extends javax.swing.JFrame {
 
         jTable1.setModel(model);
 
-        // Add table model listener to handle updates
         jTable1.getModel().addTableModelListener(e -> {
             if (e.getType() == javax.swing.event.TableModelEvent.UPDATE) {
                 int row = e.getFirstRow();
@@ -90,20 +86,20 @@ public class ViewAppointments extends javax.swing.JFrame {
                     Appointment appointment = findAppointmentById(appointmentId);
 
                     if (appointment != null) {
-                        if (column == 6) { // Status column
-                            String newStatus = (String) jTable1.getModel().getValueAt(row, 6);
+                        if (column == 7) { // Status column
+                            String newStatus = (String) jTable1.getModel().getValueAt(row, 7);
                             appointment.setStatus(newStatus);
 
                             if ("Completed".equalsIgnoreCase(newStatus)) {
-                                jTable1.getModel().setValueAt(true, row, 7);
+                                jTable1.getModel().setValueAt(true, row, 8);
                                 appointment.setPaid(true);
                             }
-                        } else if (column == 7) { // Paid column
-                            boolean isPaid = (Boolean) jTable1.getModel().getValueAt(row, 7);
+                        } else if (column == 8) { // Paid column
+                            boolean isPaid = (Boolean) jTable1.getModel().getValueAt(row, 8);
                             appointment.setPaid(isPaid);
 
                             if (isPaid && "Scheduled".equalsIgnoreCase(appointment.getStatus())) {
-                                jTable1.getModel().setValueAt("Paid", row, 6);
+                                jTable1.getModel().setValueAt("Paid", row, 7);
                                 appointment.setStatus("Paid");
                             }
                         }
@@ -114,6 +110,7 @@ public class ViewAppointments extends javax.swing.JFrame {
             }
         });
     }
+
     private Appointment findAppointmentById(String appointmentId) {
         for (Appointment appointment : appointmentManager.appointments) {
             if (appointment.getAppointmentId().equals(appointmentId)) {
@@ -129,7 +126,6 @@ public class ViewAppointments extends javax.swing.JFrame {
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -144,20 +140,20 @@ public class ViewAppointments extends javax.swing.JFrame {
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Appointment ID", "Customer ID", "Mechanic ID", "Vehicle Name", "Appointment Date", "Service", "Status", "Paid", "Draft Amount"
+                "Appointment ID", "Customer ID", "Mechanic ID", "Vehicle Name ", "Appointment Date", "Status", "Paid"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, true, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -186,7 +182,7 @@ public class ViewAppointments extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 580, Short.MAX_VALUE)
+                        .addGap(0, 878, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addGap(22, 22, 22))
         );
@@ -194,8 +190,8 @@ public class ViewAppointments extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addGap(19, 19, 19))
         );
@@ -215,10 +211,7 @@ public class ViewAppointments extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         this.dispose();
-        // AdminMenu AM  = new AdminMenu();
-        // AM.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -226,7 +219,6 @@ public class ViewAppointments extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
@@ -246,7 +238,6 @@ public class ViewAppointments extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ViewAppointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -256,10 +247,8 @@ public class ViewAppointments extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    // End of variables declaration//GEN-END:variables
 }

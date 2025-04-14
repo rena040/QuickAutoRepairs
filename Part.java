@@ -14,10 +14,8 @@ class Part {
     }
 
     public Part() {
-        //TODO Auto-generated constructor stub
     }
 
-    // Getters and setters
     public String getPartId() { return partId; }
     public String getName() { return name; }
     public double getPrice() { return price; }
@@ -30,13 +28,11 @@ class Part {
     public void setQuantityInStock(int quantityInStock) { this.quantityInStock = quantityInStock; }
     public void setSupplier(String supplier) { this.supplier = supplier; }
 
-    // Override toString method to save to file in the specified format
     @Override
     public String toString() {
         return partId + ":" + name + ":" + price + ":" + quantityInStock + ":" + supplier;
     }
 
-    // Constructor to read Part data from file
     public static Part fromString(String data) {
         String[] parts = data.split(":");
         String partId = parts[0];

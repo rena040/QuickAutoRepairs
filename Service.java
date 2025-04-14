@@ -16,17 +16,14 @@ class Service {
     private Date serviceDate;
     private String mechanicId;
 
-    // File for storing service data
     private static final File SERVICE_FILE = new File("service.txt");
     private static List<Service> services = new ArrayList<>();
     private static Inventory inventory;  // Reference to inventory system
 
-    // Initialize with inventory
     public static void setInventory(Inventory inv) {
         inventory = inv;
     }
 
-    // Constructors
     public Service(String serviceId, String serviceType, String servicePost, Date serviceDate, String mechanicId) {
         this.serviceId = serviceId;
         this.serviceType = serviceType;
@@ -42,7 +39,6 @@ class Service {
         this.quantitiesUsed = new ArrayList<>();
     }
 
-    // Getters and setters
     public String getServiceId() { return serviceId; }
     public String getServiceType() { return serviceType; }
     public List<String> getPartIdsUsed() { return partIdsUsed; }
@@ -57,7 +53,6 @@ class Service {
     public void setServiceDate(Date serviceDate) { this.serviceDate = serviceDate; }
     public void setMechanicId(String mechanicId) { this.mechanicId = mechanicId; }
 
-    // Add a part by ID and quantity
     public void addPartUsed(String partId, int quantity) {
         if (partId != null && !partId.isEmpty() && quantity > 0) {
             partIdsUsed.add(partId);
@@ -65,7 +60,6 @@ class Service {
         }
     }
 
-    // Calculate total cost of service
     public double calculateTotalCost(double laborRate) {
         if (inventory == null) return laborRate;
         
@@ -88,7 +82,6 @@ class Service {
           .append(serviceDate.getTime()).append(":")
           .append(mechanicId).append(":");
         
-        // Append parts and quantities
         for (int i = 0; i < partIdsUsed.size(); i++) {
             if (i > 0) sb.append(",");
             sb.append(partIdsUsed.get(i)).append("-").append(quantitiesUsed.get(i));
@@ -97,11 +90,9 @@ class Service {
         return sb.toString();
     }
 
-    // File operations
     public static void readData() {
         services.clear();
         if (!SERVICE_FILE.exists()) {
-            // Create the file if it doesn't exist
             try {
                 SERVICE_FILE.createNewFile();
             } catch (IOException e) {
@@ -117,7 +108,6 @@ class Service {
                     try {
                         String[] data = line.split(":");
                         if (data.length >= 6) {
-                            // Format is: SRV001:Oil Change:PRT001-1,PRT002-1:Standard Oil Change:1673845200000:M001
                             String serviceId = data[0];
                             String serviceType = data[1];
                             String servicePost = data[3]; // Description is at index 3
@@ -126,7 +116,6 @@ class Service {
                             
                             Service service = new Service(serviceId, serviceType, servicePost, serviceDate, mechanicId);
                             
-                            // Handle parts which are at index 2
                             if (!data[2].isEmpty()) {
                                 String[] partsData = data[2].split(",");
                                 for (String partData : partsData) {
@@ -174,7 +163,6 @@ class Service {
         }
     }
 
-    // CRUD operations
     public static void addService(Service service) {
         readData();
         services.add(service);
@@ -224,7 +212,6 @@ class Service {
         return false;
     }
 
-    // ID generation
     public static String generateNextServiceId() {
         readData();
         int maxId = 0;
@@ -248,7 +235,6 @@ class Service {
 
     public boolean completeService() {
         if (deductUsedPartsFromInventory()) {
-            // Update service status or other completion logic if needed
             System.out.println("Service completed and parts deducted from inventory");
             return true;
         } else {
@@ -277,13 +263,11 @@ class Service {
         return messages;
     }
 
-    // Inventory management
     public boolean deductUsedPartsFromInventory() {
         if (inventory == null) return false;
         
         boolean allPartsAvailable = true;
         
-        // First check if all parts are available
         for (int i = 0; i < partIdsUsed.size(); i++) {
             Part part = inventory.findPart(partIdsUsed.get(i));
             if (part == null || part.getQuantityInStock() < quantitiesUsed.get(i)) {
@@ -294,7 +278,6 @@ class Service {
         
         if (!allPartsAvailable) return false;
         
-        // If all parts available, deduct them
         for (int i = 0; i < partIdsUsed.size(); i++) {
             Part part = inventory.findPart(partIdsUsed.get(i));
             part.setQuantityInStock(part.getQuantityInStock() - quantitiesUsed.get(i));
@@ -304,7 +287,6 @@ class Service {
         return true;
     }
 
-    // Utility methods
     public static List<Service> findServicesByMechanic(String mechanicId) {
         readData();
         List<Service> result = new ArrayList<>();

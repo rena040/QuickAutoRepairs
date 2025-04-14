@@ -17,11 +17,9 @@ class Payment {
     private boolean discountApplied;
     private double discountAmount;
 
-    // File for storing payment data
     private static final File PAYMENT_FILE = new File("payment.txt");
     private static List<Payment> payments = new ArrayList<>();
 
-    // Constructors
     public Payment(String paymentId, String appointmentId, String customerId, 
                   double amount, String paymentDate, String cashierId) {
         this.paymentId = paymentId;
@@ -44,7 +42,6 @@ class Payment {
 
     public Payment() {}
 
-    // Getters and setters
     public String getPaymentId() { return paymentId; }
     public String getAppointmentId() { return appointmentId; }
     public String getCustomerId() { return customerId; }
@@ -64,7 +61,6 @@ class Payment {
                discountApplied + ":" + discountAmount;
     }
 
-    // Generate a receipt as a formatted string
     public String generateReceipt() {
         StringBuilder receipt = new StringBuilder();
         receipt.append("=== PAYMENT RECEIPT ===\n");
@@ -84,7 +80,6 @@ class Payment {
         return receipt.toString();
     }
 
-    // File operations
     public static void readData() {
         payments.clear();
         if (!PAYMENT_FILE.exists()) return;
@@ -128,7 +123,6 @@ class Payment {
         }
     }
 
-    // CRUD operations
     public static void addPayment(Payment payment) {
         readData();
         payments.add(payment);
@@ -196,19 +190,16 @@ class Payment {
     public String processPayment(String appointmentId, String cashierId, boolean applyDiscount) {
         PaymentProcessor processor = new PaymentProcessor();
         
-        // Find the appointment
         Appointment appointment = processor.findAppointmentById(appointmentId);
         if (appointment == null) {
             throw new IllegalArgumentException("Appointment not found");
         }
         
-        // Process the payment
         Payment payment = processor.processAppointmentPayment(appointment, cashierId, applyDiscount);
         if (payment == null) {
             throw new IllegalArgumentException("Payment processing failed");
         }
         
-        // Generate and return the receipt
         return payment.generateReceipt();
     }
     
@@ -236,7 +227,6 @@ class PaymentProcessor {
         this.appointmentManager = new Appointment();
         this.customerManager = new Customer();
         
-        // Initialize the data
         appointmentManager.readData(new File("appointment.txt"));
         customerManager.readData(new File("customer.txt"));
     }
@@ -247,7 +237,6 @@ class PaymentProcessor {
      * @return The appointment if found, null otherwise
      */
     public Appointment findAppointmentById(String appointmentId) {
-        // Reload the data to ensure we have the latest
         appointmentManager.readData(new File("appointment.txt"));
         
         for (Appointment appointment : appointmentManager.appointments) {
@@ -264,7 +253,6 @@ class PaymentProcessor {
      * @return List of scheduled appointments for the customer
      */
     public List<Appointment> findScheduledAppointmentsByCustomerId(String customerId) {
-        // Reload the data to ensure we have the latest
         appointmentManager.readData(new File("appointment.txt"));
         List<Appointment> scheduledAppointments = new ArrayList<>();
         
@@ -296,10 +284,8 @@ public Payment processAppointmentPayment(Appointment appointment, String cashier
         return null;
     }
 
-    // Reload the latest data
     appointmentManager.readData(new File("appointment.txt"));
     
-    // Find the current version of the appointment
     Appointment currentAppointment = null;
     for (Appointment app : appointmentManager.appointments) {
         if (app.getAppointmentId().equals(appointment.getAppointmentId())) {
@@ -312,17 +298,14 @@ public Payment processAppointmentPayment(Appointment appointment, String cashier
         return null;
     }
 
-    // Use the hasPaid method to update status
     if (!currentAppointment.hasPaid()) {
         System.out.println("Failed to process payment - appointment cannot be marked as paid");
         return null;
     }
 
-    // Calculate payment amount
     double amount = currentAppointment.getDraft();
     double discountAmount = 0.0;
 
-    // Check for discount eligibility
     Customer customer = getCustomerById(currentAppointment.getCustomerId());
     if (applyDiscount && customer != null && 
         customer.getLoyaltyCard() != null && 
@@ -333,7 +316,6 @@ public Payment processAppointmentPayment(Appointment appointment, String cashier
         amount -= discountAmount;
     }
 
-    // Create payment record
     String paymentId = Payment.generateNextPaymentId();
     String paymentDate = LocalDate.now().format(Appointment.DATE_FORMATTER);
     
@@ -348,7 +330,6 @@ public Payment processAppointmentPayment(Appointment appointment, String cashier
         discountAmount
     );
     
-    // Save changes
     appointmentManager.writeToFile(new File("appointment.txt"), appointmentManager.appointments);
     Payment.addPayment(payment);
     
@@ -369,8 +350,6 @@ public Payment processAppointmentPayment(Appointment appointment, String cashier
         return null;
     }
     public Appointment getAppointmentById(String appointmentId) {
-        // Implement logic to find and return appointment by ID
-        // This should read from your appointment data file
         for (Appointment appointment : appointmentManager.appointments) {
             if (appointment.getAppointmentId().equals(appointmentId)) {
                 return appointment;

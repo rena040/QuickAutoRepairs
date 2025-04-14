@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -15,24 +16,25 @@ class Appointment {
     private String mechanicId;
     private String vehicleName;
     private String appointmentDate;
+    private String appointmentTime;  // New field for time
     private String service;
     private String status;
     private double draft;
     private boolean paid;  // New field
 
-    // Date formatter for parsing and formatting dates
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
     
     File AFile = new File("appointment.txt");
     List<Appointment> appointments = new ArrayList<>();
 
-    // Constructors
-    public void BookAppointment(String appId, String custId, String mechanicId, String vehicle, String date, String serviceId) {
+    public void BookAppointment(String appId, String custId, String mechanicId, String vehicle, String date, String time, String serviceId) {
         this.appointmentId = appId;
         this.customerId = custId;
         this.mechanicId = mechanicId;    
         this.vehicleName = vehicle;
         this.appointmentDate = date;
+        this.appointmentTime = time;
         this.service = serviceId;
         this.status = "Scheduled"; // Default status when booking an appointment
         this.draft = Service.findServiceById(serviceId).calculateTotalCost(Mechanic.searchMechanicById(mechanicId).getPayRate()); // Default draft value
@@ -40,13 +42,14 @@ class Appointment {
     }
 
     public Appointment(String appointmentId, String customerId, String mechanicId, 
-                      String vehicleName, String appointmentDate, String service, 
-                      String status, double draft, boolean paid) {
+                      String vehicleName, String appointmentDate, String appointmentTime,
+                      String service, String status, double draft, boolean paid) {
         this.appointmentId = appointmentId;
         this.customerId = customerId;
         this.mechanicId = mechanicId;
         this.vehicleName = vehicleName;
         this.appointmentDate = appointmentDate;
+        this.appointmentTime = appointmentTime;
         this.service = service;
         this.status = status;
         this.draft = draft;
@@ -55,17 +58,16 @@ class Appointment {
 
     public Appointment() {}
 
-    // Getters and setters
     public String getAppointmentId() { return appointmentId; }
     public String getCustomerId() { return customerId; }
     public String getMechanicId() { return mechanicId; }
     public String getVehicleName() { return vehicleName; }
     public String getAppointmentDate() { return appointmentDate; }
+    public String getAppointmentTime() { return appointmentTime; }
     public String getStatus() { return status; }
     public String getService() { return service; }
     public void setStatus(String status) { 
         this.status = status; 
-        // Update paid status if status is "Completed"
         if ("Completed".equalsIgnoreCase(status)) {
             this.paid = true;
         }
@@ -75,7 +77,6 @@ class Appointment {
     public boolean isPaid() { return paid; }
     public void setPaid(boolean paid) { this.paid = paid; }
 
-    // Check if appointment date has passed
     public boolean hasPassed() {
         try {
             LocalDate appointmentLocalDate = LocalDate.parse(this.appointmentDate, DATE_FORMATTER);
@@ -100,7 +101,6 @@ class Appointment {
         }
     }
 
-    // Update status based on date
     public void updateStatusBasedOnDate() {
         if (hasPassed()) {
             this.status = "Completed";
@@ -111,7 +111,6 @@ class Appointment {
     }
 
     public boolean hasPaid() {
-        // Check if current status allows payment
         if (!"Scheduled".equalsIgnoreCase(this.status)) {
             System.out.println("Cannot mark as paid - appointment is not in Scheduled status");
             return false;
@@ -124,7 +123,6 @@ class Appointment {
 
     public void updateStatus(String status) {
         this.status = status;
-        // Update paid status if status is "Completed"
         if ("Completed".equalsIgnoreCase(status)) {
             this.paid = true;
         }
@@ -132,26 +130,37 @@ class Appointment {
     }
 
     @Override
-    public String toString() {
-        return appointmentId + ":" + customerId + ":" + mechanicId + ":" + 
-               vehicleName + ":" + appointmentDate + ":" + service + ":" + 
-               status + ":" + draft + ":" + paid;
-    }
+public String toString() {
+    String formattedTime = appointmentTime.replace(":", "-"); // Replace colon with hyphen
+    return String.join(":",
+            appointmentId,
+            customerId,
+            mechanicId,
+            vehicleName,
+            appointmentDate,
+            formattedTime,
+            service,
+            status,
+            String.valueOf(draft),
+            String.valueOf(paid));
+}
 
-    // File operations
     public void readData(File filename) {
         appointments.clear();
         if (!filename.exists()) return;
-
+    
         try (Scanner appFile = new Scanner(filename)) {
             while (appFile.hasNext()) {
-                String[] data = appFile.nextLine().split(":");
-                if (data.length >= 8) { // Ensure service field is included
-                    boolean paidStatus = data.length >= 9 ? Boolean.parseBoolean(data[8]) : false;
-                    Appointment p = new Appointment(data[0], data[1], data[2], 
-                                                     data[3], data[4], data[5], 
-                                                     data[6], Double.parseDouble(data[7]), paidStatus);
-                    p.updateStatusBasedOnDate(); // Update status when loading
+                String line = appFile.nextLine();
+                String[] data = line.split(":");
+                if (data.length >= 10) {
+                    String appointmentTime = data[5].replace("-", ":"); // Revert hyphen to colon
+                    boolean paidStatus = Boolean.parseBoolean(data[9]);
+                    Appointment p = new Appointment(
+                            data[0], data[1], data[2], data[3], data[4],
+                            appointmentTime, data[6], data[7],
+                            Double.parseDouble(data[8]), paidStatus);
+                    p.updateStatusBasedOnDate();
                     appointments.add(p);
                 }
             }
@@ -167,7 +176,6 @@ class Appointment {
                 file.createNewFile();
             }
 
-            // Overwrite the file with current data
             try (PrintWriter pw = new PrintWriter(new FileWriter(file))) {
                 for (Appointment app : appointmentsList) {
                     app.updateStatusBasedOnDate(); // Update status before saving
@@ -179,7 +187,12 @@ class Appointment {
         }
     }
 
+
     public void addAppointment(Appointment appointment) {
+        String custid = appointment.getCustomerId();
+        Customer customer = new Customer();
+        LoyaltyCard lc = customer. findLoyaltyCardByCustomerId(custid);
+        lc.addStamp();
         appointment.updateStatusBasedOnDate();
         appointments.add(appointment);
         writeToFile(AFile, appointments);
@@ -228,7 +241,42 @@ class Appointment {
     }
 
     public static Appointment[] getAllAppointments() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAllAppointments'");
+    }
+
+    public boolean checkAvailability(String mechanicId, String date, String time) {
+        readData(AFile);
+
+        // Parse the requested time into a LocalTime object
+        LocalTime requestedTime;
+        try {
+            requestedTime = LocalTime.parse(time, TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            System.err.println("Invalid time format: " + time);
+            return false; // Invalid time format
+        }
+
+        // Iterate through the appointments to check for conflicts
+        for (Appointment appointment : appointments) {
+            if (appointment.getMechanicId().equals(mechanicId) &&
+                appointment.getAppointmentDate().equals(date)) {
+                
+                // Parse the existing appointment time
+                LocalTime existingTime;
+                try {
+                    existingTime = LocalTime.parse(appointment.getAppointmentTime(), TIME_FORMATTER);
+                } catch (DateTimeParseException e) {
+                    System.err.println("Invalid time format in existing appointment: " + appointment.getAppointmentTime());
+                    continue; // Skip invalid times
+                }
+
+                // Check if the requested time overlaps with the 3-hour slot of the existing appointment
+                if (!requestedTime.isBefore(existingTime.minusHours(3)) && 
+                    !requestedTime.isAfter(existingTime.plusHours(3))) {
+                    return false; // Overlap detected
+                }
+            }
+        }
+        return true; // Mechanic is available
     }
 }

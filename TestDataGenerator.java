@@ -37,13 +37,11 @@ public class TestDataGenerator {
 
     private static void generateAppointmentData() {
         List<String> appointments = Arrays.asList(
-            // Format: AppointmentID:CustomerID:MechanicID:VehicleName:AppointmentDate:Service:Status:Draft:Paid
             "APT001:CST001:M001:Toyota Camry:2025-03-15:Oil Change:Completed:85.0:true",
             "APT002:CST002:M002:Honda Civic:2025-03-20:Tire Rotation:Completed:120.0:true",
             "APT003:CST003:M003:Ford Focus:2025-04-01:Brake Inspection:Completed:150.0:true",
             "APT004:CST004:M004:Chevrolet Malibu:2025-04-05:Battery Replacement:Completed:200.0:true",
             
-            // Current and future appointments (April 11+)
             "APT005:CST005:M005:Nissan Altima:2025-04-15:Engine Diagnostics:Scheduled:90.0:false",
             "APT006:CST006:M001:Hyundai Ioniq:2025-04-20:Transmission Repair:In Progress:180.0:false",
             "APT007:CST007:M002:Kia EV9:2025-04-25:Suspension Check:Scheduled:220.0:false",

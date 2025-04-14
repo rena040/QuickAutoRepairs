@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author rosha
+ * @author Nsaya Burrell, Karena Gayle, Justin Moo, Roshane Roach, Katelyn Tait, Tishawn Whyte 
  */
 public class MechViewAppointments extends javax.swing.JFrame {
 
@@ -26,35 +26,30 @@ public class MechViewAppointments extends javax.swing.JFrame {
     }
 
     private void applyStyles() {
-        // Style the panel
         UIStyle.stylePanel(jPanel1);
-
-        // Style buttons
+    
         UIStyle.styleButton(jButton1);
-
-        // Style table
+    
         jTable1.setFont(UIStyle.LABEL_FONT);
         jTable1.getTableHeader().setFont(UIStyle.LABEL_FONT);
+    
+        jTable1.setShowGrid(true);
+        jTable1.setGridColor(java.awt.Color.BLACK); // Set grid color to black
     }
 
     public void setMechanicId(String mechanicId) {
-        // Load appointments for the specified mechanic
         this.mechanicId = mechanicId;
-        //System.out.println("Mechanic ID set to: " + mechanicId);
         loadMechanicAppointments(mechanicId);
     }
 
     private void loadMechanicAppointments(String mechanicID) {
-        // Ensure the mechanicID is set
         if (mechanicID == null || mechanicID.isEmpty()) {
             System.out.println("Mechanic ID is not set. Cannot load appointments.");
             return;
         }
 
-        // Read appointments from the file
         appointmentManager.readData(appointmentManager.AFile);
 
-        // Filter appointments for this mechanic
         List<Appointment> filteredAppointments = new ArrayList<>();
         for (Appointment appointment : appointmentManager.appointments) {
             if (appointment.getMechanicId().equals(mechanicID)) {
@@ -62,19 +57,17 @@ public class MechViewAppointments extends javax.swing.JFrame {
             }
         }
 
-        // Sort appointments by date in ascending order
         filteredAppointments.sort((a1, a2) -> a1.getAppointmentDate().compareTo(a2.getAppointmentDate()));
 
-        // Create table model
         DefaultTableModel model = new DefaultTableModel(
             new Object[][]{},
             new String[]{
-                "Appointment ID", "Customer ID", "Vehicle Name", 
-                "Appointment Date", "Service", "Status", "Paid", "Draft Amount"
+                "App ID", "Cust ID", "Vehicle", 
+                "App Date", "App Time", "Service", "Status", "Paid", "Amount"
             }) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                if (columnIndex == 6) { // Paid column
+                if (columnIndex == 7) { // Paid column
                     return Boolean.class;
                 }
                 return String.class;
@@ -82,18 +75,17 @@ public class MechViewAppointments extends javax.swing.JFrame {
 
             @Override
             public boolean isCellEditable(int row, int column) {
-                // Only allow editing of status and paid columns
-                return column == 5 || column == 6;
+                return column == 6 || column == 7;
             }
         };
 
-        // Add sorted appointments to the table model
         for (Appointment appointment : filteredAppointments) {
             model.addRow(new Object[]{
                 appointment.getAppointmentId(),
                 appointment.getCustomerId(),
                 appointment.getVehicleName(),
                 appointment.getAppointmentDate(),
+                appointment.getAppointmentTime(), // Add the time field here
                 appointment.getService(),
                 appointment.getStatus(),
                 appointment.isPaid(),
@@ -103,7 +95,6 @@ public class MechViewAppointments extends javax.swing.JFrame {
 
         jTable1.setModel(model);
 
-        // Add table model listener to handle updates
         jTable1.getModel().addTableModelListener(e -> {
             if (e.getType() == javax.swing.event.TableModelEvent.UPDATE) {
                 int row = e.getFirstRow();
@@ -114,20 +105,20 @@ public class MechViewAppointments extends javax.swing.JFrame {
                     Appointment appointment = findAppointmentById(appointmentId);
 
                     if (appointment != null) {
-                        if (column == 5) { // Status column
-                            String newStatus = (String) jTable1.getModel().getValueAt(row, 5);
+                        if (column == 6) { // Status column
+                            String newStatus = (String) jTable1.getModel().getValueAt(row, 6);
                             appointment.setStatus(newStatus);
 
                             if ("Completed".equalsIgnoreCase(newStatus)) {
-                                jTable1.getModel().setValueAt(true, row, 6);
+                                jTable1.getModel().setValueAt(true, row, 7);
                                 appointment.setPaid(true);
                             }
-                        } else if (column == 6) { // Paid column
-                            boolean isPaid = (Boolean) jTable1.getModel().getValueAt(row, 6);
+                        } else if (column == 7) { // Paid column
+                            boolean isPaid = (Boolean) jTable1.getModel().getValueAt(row, 7);
                             appointment.setPaid(isPaid);
 
                             if (isPaid && "Scheduled".equalsIgnoreCase(appointment.getStatus())) {
-                                jTable1.getModel().setValueAt("Paid", row, 5);
+                                jTable1.getModel().setValueAt("Paid", row, 6);
                                 appointment.setStatus("Paid");
                             }
                         }
@@ -155,7 +146,6 @@ public class MechViewAppointments extends javax.swing.JFrame {
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -209,13 +199,13 @@ public class MechViewAppointments extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 98, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(781, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,7 +232,6 @@ public class MechViewAppointments extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         Login lg = new Login();
         lg.setVisible(true);
         this.dispose();
@@ -253,7 +242,6 @@ public class MechViewAppointments extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
@@ -273,7 +261,6 @@ public class MechViewAppointments extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MechViewAppointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -283,10 +270,9 @@ public class MechViewAppointments extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    // End of variables declaration//GEN-END:variables
-}
+    }
+

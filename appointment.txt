@@ -1,20 +1,36 @@
-APT001:CST001:M001:Toyota Camry:2025-03-15:Oil Change:Completed:85.0:true
-APT002:CST002:M002:Honda Civic:2025-03-20:Tire Rotation:Completed:120.0:true
-APT003:CST003:M003:Ford Focus:2025-04-01:Brake Inspection:Completed:150.0:true
-APT004:CST004:M004:Chevrolet Malibu:2025-04-05:Battery Replacement:Completed:200.0:true
-APT005:CST005:M005:Nissan Altima:2025-04-15:Engine Diagnostics:Scheduled:90.0:false
-APT006:CST006:M001:Hyundai Ioniq:2025-04-20:Transmission Repair:In Progress:180.0:false
-APT007:CST007:M002:Kia EV9:2025-04-25:Suspension Check:Scheduled:220.0:false
-APT008:CST008:M003:VW ID.4:2025-05-01:AC Service:Scheduled:160.0:false
-APT009:CST009:M004:Subaru Solterra:2025-05-05:Exhaust Repair:Scheduled:250.0:false
-APT010:CST010:M005:Mazda CX-90:2025-05-10:Hybrid System Check:Scheduled:300.0:false
-APT011:CST001:M006:Toyota bZ4X:2025-05-15:General Maintenance:Scheduled:170.0:false
-APT012:CST002:M007:Honda Prologue:2025-05-20:Oil Change:In Progress:210.0:false
-APT013:CST003:M008:Ford F-150 Lightning:2025-06-01:Brake Replacement:Scheduled:190.0:false
-APT014:CST004:M009:Chevrolet Blazer EV:2025-06-05:Battery Replacement:Scheduled:400.0:false
-APT015:CST005:M010:Nissan Ariya:2025-06-10:Engine Diagnostics:Scheduled:280.0:false
-APT016:CST006:M006:Hyundai Kona Electric:2025-06-15:Suspension Check:Scheduled:320.0:false
-APT017:CST007:M007:Kia Niro EV:2025-06-20:AC Service:Scheduled:350.0:false
-APT018:CST008:M008:VW ID.Buzz:2025-07-01:Exhaust Repair:Scheduled:380.0:false
-APT019:CST009:M009:Subaru Ascent:2025-07-05:Hybrid System Check:Scheduled:270.0:false
-APT020:CST010:M010:Mazda MX-30:2025-07-10:General Maintenance:Scheduled:420.0:false
+APT001:CUST001:M001:Toyota Corolla:2025-04-18:09-00:SRV001:Scheduled:800.0:false
+APT002:CUST002:M002:Honda Civic:2025-04-20:10-30:SRV002:Scheduled:875.0:false
+APT003:CUST003:M003:Ford Focus:2025-04-25:11-00:SRV003:Scheduled:836.0:false
+APT004:CUST004:M004:Chevy Impala:2025-04-30:13-00:SRV004:Scheduled:888.0:false
+APT005:CUST005:M005:Nissan Altima:2025-05-01:15-00:SRV005:Scheduled:861.0:false
+APT006:CUST006:M006:Hyundai Sonata:2025-05-03:10-00:SRV006:Scheduled:828.0:false
+APT007:CUST007:M007:BMW 3 Series:2025-05-05:11-30:SRV007:Scheduled:945.0:false
+APT008:CUST008:M008:Kia Sorento:2025-05-06:09-30:SRV008:Scheduled:1040.0:false
+APT009:CUST009:M009:Mazda CX-5:2025-05-08:14-00:SRV009:Scheduled:882.0:false
+APT010:CUST010:M010:Subaru Forester:2025-05-10:10-15:SRV010:Scheduled:820.0:false
+APT011:CUST011:M001:Tesla Model 3:2025-04-22:12-00:SRV001:Scheduled:800.0:false
+APT012:CUST012:M002:Jeep Wrangler:2025-04-24:13-30:SRV002:Scheduled:875.0:false
+APT013:CUST013:M003:Chevy Malibu:2025-04-26:09-45:SRV003:Scheduled:836.0:false
+APT014:CUST014:M004:Dodge Charger:2025-04-28:11-45:SRV004:Scheduled:888.0:false
+APT015:CUST015:M005:Volkswagen Golf:2025-05-02:15-30:SRV005:Scheduled:861.0:false
+APT016:CUST016:M006:Ford Escape:2025-05-04:14-15:SRV006:Scheduled:828.0:false
+APT017:CUST017:M007:Toyota Camry:2025-03-10:09-00:SRV007:Completed:945.0:true
+APT018:CUST018:M008:Honda Fit:2025-03-12:10-30:SRV008:Completed:1040.0:true
+APT019:CUST019:M009:Hyundai Elantra:2025-03-14:11-00:SRV009:Completed:882.0:true
+APT020:CUST020:M010:Toyota RAV4:2025-03-16:13-00:SRV010:Completed:820.0:true
+APT021:CUST021:M001:Ford Mustang:2025-03-18:14-30:SRV001:Completed:800.0:true
+APT022:CUST022:M002:Chevy Cruze:2025-03-20:15-00:SRV002:Completed:875.0:true
+APT023:CUST023:M003:Honda Pilot:2025-03-22:12-30:SRV003:Completed:836.0:true
+APT024:CUST024:M004:Jeep Cherokee:2025-03-24:10-45:SRV004:Completed:888.0:true
+APT025:CUST025:M005:Kia Soul:2025-03-26:09-30:SRV005:Completed:861.0:true
+APT026:CUST026:M006:Chrysler 300:2025-03-28:11-15:SRV006:Completed:828.0:true
+APT027:CUST027:M001:Toyota Highlander:2025-05-12:08-00:SRV001:Scheduled:800.0:false
+APT028:CUST028:M002:Honda Accord:2025-05-12:10-45:SRV002:Scheduled:875.0:false
+APT029:CUST029:M003:Ford Explorer:2025-05-12:13-30:SRV003:Scheduled:836.0:false
+APT030:CUST030:M004:Chevy Tahoe:2025-05-13:09-00:SRV004:Scheduled:888.0:false
+APT031:CUST031:M005:Nissan Rogue:2025-05-13:11-45:SRV005:Scheduled:861.0:false
+APT032:CUST032:M006:Hyundai Tucson:2025-05-13:14-30:SRV006:Scheduled:828.0:false
+APT033:CUST033:M007:BMW X5:2025-05-14:08-15:SRV007:Scheduled:945.0:false
+APT034:CUST034:M008:Kia Sportage:2025-05-14:11-00:SRV008:Scheduled:1040.0:false
+APT035:CUST035:M009:Mazda 3:2025-05-14:13-45:SRV009:Scheduled:882.0:false
+APT036:CUST036:M010:Subaru Outback:2025-05-15:09-00:SRV010:Scheduled:820.0:false

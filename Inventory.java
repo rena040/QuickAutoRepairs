@@ -8,7 +8,6 @@ class Inventory {
     private String storageLocation;
     private File inventoryFile;
 
-    // Constructor without inventoryId
     public Inventory(String storageLocation, String filePath) {
         this.storageLocation = storageLocation;
         this.parts = new ArrayList<>();
@@ -16,16 +15,13 @@ class Inventory {
         readData(inventoryFile); // Read existing parts from file
     }
 
-    // Default constructor
     public Inventory(String filePath) {
 
     }
 
     public Inventory() {
-        //TODO Auto-generated constructor stub
     }
 
-    // Getters and setters
     public List<Part> getParts() { return parts; }
     public String getStorageLocation() { return storageLocation; }
 
@@ -70,26 +66,21 @@ class Inventory {
         return true;
     }
 
-    // Method to read existing parts data from file
     public void readData(File filename) {
         try (Scanner partFile = new Scanner(filename)) {
             while (partFile.hasNext()) {
                 String[] data = partFile.nextLine().split(":");
-                // Create Part object directly from parsed data
                 Part p = new Part(data[0], data[1], Double.parseDouble(data[2]), 
                                  Integer.parseInt(data[3]), data[4]);
                 parts.add(p);
             }
         } catch (IOException ioe) {
-            // Handle error if file reading fails
             System.out.println("Error reading from file.");
         }
     }
 
-    // Method to write parts data to file (appends)
     public void writeToFile() {
         try {
-            // Ensure the file exists, create if not
             if (!inventoryFile.exists()) {
                 File parent = inventoryFile.getParentFile();
                 if (parent != null) {
@@ -98,7 +89,6 @@ class Inventory {
                 inventoryFile.createNewFile();
             }
 
-            // Append to the file (true for appending)
             try (PrintWriter pw = new PrintWriter(new FileWriter(inventoryFile, true))) {
                 for (Part part : parts) {
                     pw.println(part.toString());
@@ -111,11 +101,9 @@ class Inventory {
         }
     }
 
-    // Method to view all parts in the inventory (read from file and display)
     public List<Part> viewAllParts() {
         List<Part> partList = new ArrayList<>(); // To store all parts
         
-        // Read and store parts from the file
         try (Scanner partFile = new Scanner(inventoryFile)) {
             if (!partFile.hasNext()) {
                 System.out.println("No parts available in inventory.");

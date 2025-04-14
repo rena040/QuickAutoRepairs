@@ -12,7 +12,6 @@ public class Mechanic {
     private static List<Mechanic> mechanicList = new ArrayList<>();
     private static int lastUsedId = 0; // Track the last used ID number
 
-    // Constructors
     public Mechanic() {}
 
     public Mechanic(String mechanicId, String name, String specialization, double workHours, double payRate) {
@@ -23,14 +22,12 @@ public class Mechanic {
         this.payRate = payRate;
     }
 
-    // Getters
     public String getMechanicId() { return mechanicId; }
     public String getName() { return name; }
     public String getSpecialization() { return specialization; }
     public double getWorkHours() { return workHours; }
     public double getPayRate() { return payRate; }
 
-    // Setters
     public void setWorkHours(double workHours) { this.workHours = workHours; }
     public void setPayRate(double payRate) { this.payRate = payRate; }
 
@@ -39,13 +36,11 @@ public class Mechanic {
         return mechanicId + ":" + name + ":" + specialization + ":" + workHours + ":" + payRate;
     }
 
-    // Generate the next available mechanic ID in format M001, M002, etc.
     public static String generateNextId() {
         lastUsedId++;
         return String.format("M%03d", lastUsedId);
     }
 
-    // Load mechanic data from file and track last used ID
     public static void loadMechanics() {
         mechanicList.clear();
         lastUsedId = 0;
@@ -60,7 +55,6 @@ public class Mechanic {
                             Double.parseDouble(data[3]), Double.parseDouble(data[4]));
                     mechanicList.add(m);
 
-                    // Update lastUsedId from ID string, e.g., M012
                     try {
                         int numericId = Integer.parseInt(data[0].substring(1));
                         if (numericId > lastUsedId) {
@@ -76,7 +70,6 @@ public class Mechanic {
         }
     }
 
-    // Add new mechanic to list and save to file
     public void addMechanic(Mechanic m) {
         mechanicList.add(m);
         try (PrintWriter pw = new PrintWriter(new FileWriter(MECHANIC_FILE, true))) {
@@ -86,7 +79,6 @@ public class Mechanic {
         }
     }
 
-    // Search by mechanic ID
     public static Mechanic searchMechanicById(String id) {
         for (Mechanic m : mechanicList) {
             if (m.getMechanicId().equalsIgnoreCase(id)) {
@@ -96,7 +88,6 @@ public class Mechanic {
         return null;
     }
 
-    // Search by name and return ID
     public static String getMechanicIdByName(String name) {
         for (Mechanic m : mechanicList) {
             if (m.getName().equalsIgnoreCase(name)) {
@@ -106,11 +97,9 @@ public class Mechanic {
         return null;
     }
 
-    // Return all mechanics
     public static List<Mechanic> getAllMechanics() {
         return new ArrayList<>(mechanicList);
     }
-    // Add this method to your Mechanic class
 public static boolean updateMechanic(Mechanic updatedMechanic) {
     loadMechanics(); // Ensure we have the latest data
     
@@ -124,7 +113,6 @@ public static boolean updateMechanic(Mechanic updatedMechanic) {
     }
     
     if (found) {
-        // Save all mechanics to file
         try (PrintWriter pw = new PrintWriter(new FileWriter(MECHANIC_FILE))) {
             for (Mechanic m : mechanicList) {
                 pw.println(m.toString());

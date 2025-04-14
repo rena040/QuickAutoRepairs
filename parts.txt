@@ -8,3 +8,13 @@ PRT007:Timing Belt:45.0:40:BeltMasters
 PRT008:Oxygen Sensor:85.0:30:SensorPro
 PRT009:Fuel Pump:95.0:25:FlowTech
 PRT010:Shock Absorber:75.0:35:SuspensionPlus
+PRT011:Coolant:20.0:60:CoolFlow
+PRT012:Transmission Fluid:30.0:50:GearOil Ltd
+PRT013:Headlight Bulb:18.0:40:BrightLite
+PRT014:Alignment Kit:65.0:15:PrecisionAlign
+PRT015:Radiator:130.0:20:CoolCore
+PRT016:Exhaust Clamp:25.0:35:ExhaustWorks
+PRT017:Engine Mount:75.0:10:MountTech
+PRT018:Drive Belt:35.0:45:BeltMasters
+PRT019:Steering Fluid:12.0:60:HydroSteer
+PRT020:Transmission Filter:28.0:30:GearOil Ltd

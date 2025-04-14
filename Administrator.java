@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 class Administrator {
@@ -27,7 +26,6 @@ class Administrator {
         this.customerList = new ArrayList<>();
     }
 
-    // Getters and setters
     public String getAdminId() { return adminId; }
     public String getName() { return name; }
     public Inventory getInventory() { return inventory; }
@@ -44,7 +42,6 @@ class Administrator {
         return adminId + ":" + name + ":" + employeeList + ":" + customerList;
     }
 
-    // Method to read existing customer data from file
     public void readData(File filename) {
         try (Scanner fileScanner = new Scanner(filename)) {
             while (fileScanner.hasNext()) {
@@ -53,14 +50,11 @@ class Administrator {
                 admins.add(p);
             }
         } catch (IOException ioe) {
-            // Handle error if file reading fails
         }
     }
 
-    // Write customer data to file and append (do not overwrite)
     public void writeToFile(File file, List<Administrator> admins2) {
         try {
-            // Ensure the file exists, create if not
             if (!file.exists()) {
                 File parent = file.getParentFile();
                 if (parent != null) {
@@ -69,7 +63,6 @@ class Administrator {
                 file.createNewFile();
             }
 
-            // Append to the file (true for appending)
             try (PrintWriter pw = new PrintWriter(new FileWriter(file, true))) { // 'true' allows appending
                 for (Administrator ad : admins2) {
                     pw.println(ad.toString());
@@ -82,7 +75,6 @@ class Administrator {
         }
     }
 
-    // Add a new customer to the list and append to file
     public void addAdmin(Administrator ad) {
         admins.add(ad);
         writeToFile(AdminFile, admins);  // Append the updated customer list to the file
