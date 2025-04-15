@@ -143,12 +143,12 @@ public class PaymentProcessing extends javax.swing.JFrame {
 
         buttonGroup1.add(radioAppID);
         radioAppID.setFont(new java.awt.Font("Segoe UI", 1, 14)); 
-        radioAppID.setForeground(new java.awt.Color(255, 255, 255));
+        radioAppID.setForeground(new java.awt.Color(25, 25, 25));
         radioAppID.setText("Search By Appointment Id");
 
         buttonGroup1.add(radioCustID);
         radioCustID.setFont(new java.awt.Font("Segoe UI", 1, 14)); 
-        radioCustID.setForeground(new java.awt.Color(255, 255, 255));
+        radioCustID.setForeground(new java.awt.Color(25, 25, 25));
         radioCustID.setText("Search By Customer ID");
 
         appointmentTable.setModel(new javax.swing.table.DefaultTableModel(

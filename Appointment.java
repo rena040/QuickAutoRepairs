@@ -178,7 +178,7 @@ public String toString() {
 
             try (PrintWriter pw = new PrintWriter(new FileWriter(file))) {
                 for (Appointment app : appointmentsList) {
-                    app.updateStatusBasedOnDate(); // Update status before saving
+                    app.updateStatusBasedOnDate(); 
                     pw.println(app.toString());
                 }
             }

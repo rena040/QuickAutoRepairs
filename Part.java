@@ -42,4 +42,5 @@ class Part {
         String supplier = parts[4];
         return new Part(partId, name, price, quantityInStock, supplier);
     }
+    
 }

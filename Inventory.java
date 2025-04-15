@@ -31,12 +31,12 @@ class Inventory {
 
     public void addPart(Part part) {
         parts.add(part);
-        writeToFile(); // Append the new part to file
+        writeToFile(part); // Append the new part to file
     }
     
     public void removePart(Part part) {
         parts.remove(part);
-        writeToFile(); // Rewrite parts to file after removal
+        writeToFile(part); // Rewrite parts to file after removal
     }
 
     public Part findPart(String identifier) {
@@ -83,7 +83,7 @@ class Inventory {
         }
     }
 
-    public void writeToFile() {
+    private void writeToFile(Part part) {
         try {
             if (!inventoryFile.exists()) {
                 File parent = inventoryFile.getParentFile();
@@ -93,15 +93,11 @@ class Inventory {
                 inventoryFile.createNewFile();
             }
 
-            try (PrintWriter pw = new PrintWriter(new FileWriter(inventoryFile, true))) {
-                for (Part part : parts) {
-                    pw.println(part.toString());
-                }
-                System.out.println("Data appended to file: " + inventoryFile.getAbsolutePath());
+            try (PrintWriter pw = new PrintWriter(new FileWriter(inventoryFile, true))) { // true = append
+                pw.println(part.toString());
             }
         } catch (IOException e) {
-            System.out.println("An error occurred while writing to the file.");
-            e.printStackTrace();
+            System.out.println("An error occurred while writing to the file: " + e.getMessage());
         }
     }
 
@@ -141,5 +137,34 @@ class Inventory {
             System.out.println("An error occurred while updating the inventory file.");
             e.printStackTrace();
         }
+    }
+
+    public String generateNextPartId() {
+        int maxId = 0;
+
+        // Read existing part IDs from the file
+        if (inventoryFile.exists()) {
+            try (Scanner partFile = new Scanner(inventoryFile)) {
+                while (partFile.hasNext()) {
+                    String[] data = partFile.nextLine().split(":");
+                    if (data[0].startsWith("PRT")) {
+                        try {
+                            int idNumber = Integer.parseInt(data[0].substring(3)); // Extract the numeric part
+                            if (idNumber > maxId) {
+                                maxId = idNumber;
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid Part ID format: " + data[0]);
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println("Error reading from file: " + e.getMessage());
+            }
+        }
+
+        // Generate the next ID
+        int nextId = maxId + 1;
+        return String.format("PRT%03d", nextId); // Zero-padded to 3 digits
     }
 }
