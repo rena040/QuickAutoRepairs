@@ -22,7 +22,7 @@ public class MechViewAppointments extends javax.swing.JFrame {
         initComponents();
         applyStyles();
         pack();
-        setLocationRelativeTo(null); // Center the form on the screen
+        setLocationRelativeTo(null); 
     }
 
     private void applyStyles() {
@@ -34,7 +34,7 @@ public class MechViewAppointments extends javax.swing.JFrame {
         jTable1.getTableHeader().setFont(UIStyle.LABEL_FONT);
     
         jTable1.setShowGrid(true);
-        jTable1.setGridColor(java.awt.Color.BLACK); // Set grid color to black
+        jTable1.setGridColor(java.awt.Color.BLACK); 
     }
 
     public void setMechanicId(String mechanicId) {
@@ -67,7 +67,7 @@ public class MechViewAppointments extends javax.swing.JFrame {
             }) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                if (columnIndex == 7) { // Paid column
+                if (columnIndex == 7) { 
                     return Boolean.class;
                 }
                 return String.class;
@@ -85,7 +85,7 @@ public class MechViewAppointments extends javax.swing.JFrame {
                 appointment.getCustomerId(),
                 appointment.getVehicleName(),
                 appointment.getAppointmentDate(),
-                appointment.getAppointmentTime(), // Add the time field here
+                appointment.getAppointmentTime(), 
                 appointment.getService(),
                 appointment.getStatus(),
                 appointment.isPaid(),
@@ -105,7 +105,7 @@ public class MechViewAppointments extends javax.swing.JFrame {
                     Appointment appointment = findAppointmentById(appointmentId);
 
                     if (appointment != null) {
-                        if (column == 6) { // Status column
+                        if (column == 6) { 
                             String newStatus = (String) jTable1.getModel().getValueAt(row, 6);
                             appointment.setStatus(newStatus);
 
@@ -113,7 +113,7 @@ public class MechViewAppointments extends javax.swing.JFrame {
                                 jTable1.getModel().setValueAt(true, row, 7);
                                 appointment.setPaid(true);
                             }
-                        } else if (column == 7) { // Paid column
+                        } else if (column == 7) { 
                             boolean isPaid = (Boolean) jTable1.getModel().getValueAt(row, 7);
                             appointment.setPaid(isPaid);
 
@@ -262,7 +262,7 @@ public class MechViewAppointments extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MechViewAppointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        /* Create and display the form */
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MechViewAppointments().setVisible(true);

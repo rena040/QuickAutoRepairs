@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;

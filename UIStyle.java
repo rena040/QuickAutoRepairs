@@ -1,7 +1,9 @@
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class UIStyle {
     public static final Color BACKGROUND_COLOR = new Color(51, 102, 255);
@@ -30,5 +32,16 @@ public class UIStyle {
         button.setBorder(null);
         button.setOpaque(false);
         button.setContentAreaFilled(false);
+    }
+
+    public static void styleTextField(JTextField textField) {
+        textField.setFont(new Font("Arial", Font.PLAIN, 14));
+        textField.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 102, 204)));
+    }
+
+    public static void styleComboBox(JComboBox<?> comboBox) {
+        comboBox.setFont(new Font("Arial", Font.PLAIN, 14));
+        comboBox.setBackground(Color.WHITE);
+        comboBox.setForeground(Color.BLACK);
     }
 }
