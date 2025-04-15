@@ -91,11 +91,11 @@ public class Customer {
                 file.createNewFile();
             }
 
-            try (PrintWriter pw = new PrintWriter(new FileWriter(file))) { // Overwrite file
+            try (PrintWriter pw = new PrintWriter(new FileWriter(file, true))) { // Append to file
                 for (Customer customer : customers) {
                     pw.println(customer.toString());
                 }
-                System.out.println("Data written to file: " + file.getAbsolutePath());
+                System.out.println("Data appended to file: " + file.getAbsolutePath());
             }
         } catch (IOException e) {
             System.out.println("An error occurred while writing to the file.");

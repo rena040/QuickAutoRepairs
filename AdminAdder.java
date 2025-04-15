@@ -16,7 +16,7 @@ public class AdminAdder extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         adminID.setText(Administrator.generateNextAdminId());
         adminID.setEditable(false);
-        
+        adminName.setFocusable(false);
     }
 
     private void applyStyles() {
