@@ -8,3 +8,4 @@ CST007:Charlie Hall:555-6789
 CST008:Lucy Allen:555-4567
 CST009:George Young:555-8901
 CST010:Mia King:555-6543
+CST011:John Green:7892341:[]:[]:CST011:CST011:defaultValue:0.0:0

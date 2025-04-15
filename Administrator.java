@@ -1,5 +1,3 @@
-
-
 import java.util.List;
 import java.util.Scanner;
 import java.io.File;
@@ -78,5 +76,33 @@ class Administrator {
     public void addAdmin(Administrator ad) {
         admins.add(ad);
         writeToFile(AdminFile, admins);  // Append the updated customer list to the file
+    }
+
+    public static String generateNextAdminId() {
+        int maxId = 0;
+
+        if (new File("admin.txt").exists()) {
+            try (Scanner adminFile = new Scanner(new File("admin.txt"))) {
+                while (adminFile.hasNext()) {
+                    String[] data = adminFile.nextLine().split(":");
+                    try {
+                        if (data[0].startsWith("ADM")) {
+                            int currentId = Integer.parseInt(data[0].substring(3));
+                            if (currentId > maxId) {
+                                maxId = currentId;
+                            }
+                        }
+                    } catch (NumberFormatException e) {
+                        continue; 
+                    }
+                }
+            } catch (IOException ioe) {
+                System.out.println("Error reading admin file: " + ioe.getMessage());
+            }
+        }
+
+        int nextId = maxId + 1;
+
+        return String.format("ADM%03d", nextId);
     }
 }

@@ -144,17 +144,27 @@ public class CreateAccount extends javax.swing.JFrame {
         }
         Customer New_customer = new Customer(customerId, name, phoneNumber);
         New_customer.addCust(New_customer);
-        
-        
+    
+        javax.swing.JOptionPane.showMessageDialog(this, "Account Created Successfully", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        javax.swing.JOptionPane.showMessageDialog(this, "Your Customer ID is: " + customerId, "Customer ID", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    
 
         custID.setText("");
         custName.setText("");
         phoneNum.setText("");
+
+        this.dispose();
+        Login login = new Login();
+        login.setVisible(true);
+        login.setLocationRelativeTo(null);
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         this.dispose();
-        javax.swing.JOptionPane.showMessageDialog(this, "Account Created Successfully", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        Login login = new Login();
+        login.setVisible(true);
+        login.setLocationRelativeTo(null);
+        //javax.swing.JOptionPane.showMessageDialog(this, "Account Created Successfully", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**

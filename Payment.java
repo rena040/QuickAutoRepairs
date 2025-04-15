@@ -261,6 +261,9 @@ class PaymentProcessor {
                 "Scheduled".equalsIgnoreCase(appointment.getStatus())) {
                 scheduledAppointments.add(appointment);
             }
+            System.err.println("Appointment ID: " + appointment.getAppointmentId() + 
+                               ", Status: " + appointment.getStatus() + 
+                               ", Customer ID: " + appointment.getCustomerId());
         }
         return scheduledAppointments;
     }

@@ -37,8 +37,31 @@ public class Mechanic {
     }
 
     public static String generateNextId() {
-        lastUsedId++;
-        return String.format("M%03d", lastUsedId);
+        int maxId = 0;
+
+        if (MECHANIC_FILE.exists()) {
+            try (Scanner mechanicFile = new Scanner(MECHANIC_FILE)) {
+                while (mechanicFile.hasNext()) {
+                    String[] data = mechanicFile.nextLine().split(":");
+                    try {
+                        if (data[0].startsWith("M")) {
+                            int currentId = Integer.parseInt(data[0].substring(1));
+                            if (currentId > maxId) {
+                                maxId = currentId;
+                            }
+                        }
+                    } catch (NumberFormatException e) {
+                        continue; // Skip invalid IDs
+                    }
+                }
+            } catch (IOException ioe) {
+                System.out.println("Error reading mechanic file: " + ioe.getMessage());
+            }
+        }
+
+        int nextId = maxId + 1;
+
+        return String.format("M%03d", nextId);
     }
 
     public static void loadMechanics() {
@@ -100,29 +123,30 @@ public class Mechanic {
     public static List<Mechanic> getAllMechanics() {
         return new ArrayList<>(mechanicList);
     }
-public static boolean updateMechanic(Mechanic updatedMechanic) {
-    loadMechanics(); // Ensure we have the latest data
-    
-    boolean found = false;
-    for (int i = 0; i < mechanicList.size(); i++) {
-        if (mechanicList.get(i).getMechanicId().equals(updatedMechanic.getMechanicId())) {
-            mechanicList.set(i, updatedMechanic);
-            found = true;
-            break;
-        }
-    }
-    
-    if (found) {
-        try (PrintWriter pw = new PrintWriter(new FileWriter(MECHANIC_FILE))) {
-            for (Mechanic m : mechanicList) {
-                pw.println(m.toString());
+
+    public static boolean updateMechanic(Mechanic updatedMechanic) {
+        loadMechanics(); // Ensure we have the latest data
+        
+        boolean found = false;
+        for (int i = 0; i < mechanicList.size(); i++) {
+            if (mechanicList.get(i).getMechanicId().equals(updatedMechanic.getMechanicId())) {
+                mechanicList.set(i, updatedMechanic);
+                found = true;
+                break;
             }
-            return true;
-        } catch (IOException e) {
-            System.out.println("Error updating mechanic: " + e.getMessage());
-            return false;
         }
+        
+        if (found) {
+            try (PrintWriter pw = new PrintWriter(new FileWriter(MECHANIC_FILE))) {
+                for (Mechanic m : mechanicList) {
+                    pw.println(m.toString());
+                }
+                return true;
+            } catch (IOException e) {
+                System.out.println("Error updating mechanic: " + e.getMessage());
+                return false;
+            }
+        }
+        return false;
     }
-    return false;
-}
 }

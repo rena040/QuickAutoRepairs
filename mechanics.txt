@@ -8,3 +8,4 @@ M007:Ryan Taylor:Exhaust:38:22.5
 M008:Chloe Martin:Diagnostics:40:26.0
 M009:Ethan Anderson:Hybrid Systems:35:24.5
 M010:Zoe Clark:General Maintenance:37:20.5
+M011:John Cale:Bodwork and Paint:35.0:20.0

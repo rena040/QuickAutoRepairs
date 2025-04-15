@@ -203,9 +203,10 @@ public String toString() {
         readData(AFile); // Ensure data is loaded
 
         for (Appointment appointment : appointments) {
-            if (appointment.getCustomerId().equalsIgnoreCase(customerId)) {
+            if (appointment.getCustomerId().equals(customerId)) {
                 matchedAppointments.add(appointment);
             }
+            
         }
         return matchedAppointments;
     }

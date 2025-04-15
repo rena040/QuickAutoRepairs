@@ -48,13 +48,6 @@ public class PaymentProcessing extends javax.swing.JFrame {
         this.cshid = cshid;
     }
 
-        
-        
-
-        
-            
-            
-    
     private Payment paymentHandler;
     private Appointment selectedAppointment;
     private Customer selectedCustomer;
@@ -63,6 +56,7 @@ public class PaymentProcessing extends javax.swing.JFrame {
      * Creates new form PaymentProcessing
      */
     public PaymentProcessing() {
+        paymentHandler = new Payment();
         initComponents();
         applyStyles();
         pack();
