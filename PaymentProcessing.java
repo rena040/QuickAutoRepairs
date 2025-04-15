@@ -481,7 +481,7 @@ public class PaymentProcessing extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter a valid amount", 
                 "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
-        }else if (amountPaid <= selectedAppointment.getDraft()) {
+        }else if (amountPaid < selectedAppointment.getDraft()) {
             JOptionPane.showMessageDialog(this, "Amount paid is less than the due amount", 
                 "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
