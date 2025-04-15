@@ -18,3 +18,150 @@ PRT017:Engine Mount:75.0:10:MountTech
 PRT018:Drive Belt:35.0:45:BeltMasters
 PRT019:Steering Fluid:12.0:60:HydroSteer
 PRT020:Transmission Filter:28.0:30:GearOil Ltd
+PRT001:Oil Filter:10.0:50:AutoParts Inc
+PRT002:Air Filter:15.0:30:AutoParts Inc
+PRT003:Brake Pads:60.0:25:BrakeCo
+PRT004:Spark Plug:8.0:100:SparkInc
+PRT005:Windshield Wiper:12.0:75:RainTech
+PRT006:Battery:120.0:20:PowerCell
+PRT007:Timing Belt:45.0:40:BeltMasters
+PRT008:Oxygen Sensor:85.0:30:SensorPro
+PRT009:Fuel Pump:95.0:25:FlowTech
+PRT010:Shock Absorber:75.0:35:SuspensionPlus
+PRT011:Coolant:20.0:60:CoolFlow
+PRT012:Transmission Fluid:30.0:50:GearOil Ltd
+PRT013:Headlight Bulb:18.0:40:BrightLite
+PRT014:Alignment Kit:65.0:15:PrecisionAlign
+PRT015:Radiator:130.0:20:CoolCore
+PRT016:Exhaust Clamp:25.0:35:ExhaustWorks
+PRT017:Engine Mount:75.0:10:MountTech
+PRT018:Drive Belt:35.0:45:BeltMasters
+PRT019:Steering Fluid:12.0:60:HydroSteer
+PRT020:Transmission Filter:28.0:30:GearOil Ltd
+PRT800:Windshield:567.0:87:Dr.Glass
+PRT001:Oil Filter:10.0:50:AutoParts Inc
+PRT002:Air Filter:15.0:30:AutoParts Inc
+PRT003:Brake Pads:60.0:25:BrakeCo
+PRT004:Spark Plug:8.0:100:SparkInc
+PRT005:Windshield Wiper:12.0:75:RainTech
+PRT006:Battery:120.0:20:PowerCell
+PRT007:Timing Belt:45.0:40:BeltMasters
+PRT008:Oxygen Sensor:85.0:30:SensorPro
+PRT009:Fuel Pump:95.0:25:FlowTech
+PRT010:Shock Absorber:75.0:35:SuspensionPlus
+PRT011:Coolant:20.0:60:CoolFlow
+PRT012:Transmission Fluid:30.0:50:GearOil Ltd
+PRT013:Headlight Bulb:18.0:40:BrightLite
+PRT014:Alignment Kit:65.0:15:PrecisionAlign
+PRT015:Radiator:130.0:20:CoolCore
+PRT016:Exhaust Clamp:25.0:35:ExhaustWorks
+PRT017:Engine Mount:75.0:10:MountTech
+PRT018:Drive Belt:35.0:45:BeltMasters
+PRT019:Steering Fluid:12.0:60:HydroSteer
+PRT020:Transmission Filter:28.0:30:GearOil Ltd
+PRT001:Oil Filter:10.0:50:AutoParts Inc
+PRT002:Air Filter:15.0:30:AutoParts Inc
+PRT003:Brake Pads:60.0:25:BrakeCo
+PRT004:Spark Plug:8.0:100:SparkInc
+PRT005:Windshield Wiper:12.0:75:RainTech
+PRT006:Battery:120.0:20:PowerCell
+PRT007:Timing Belt:45.0:40:BeltMasters
+PRT008:Oxygen Sensor:85.0:30:SensorPro
+PRT009:Fuel Pump:95.0:25:FlowTech
+PRT010:Shock Absorber:75.0:35:SuspensionPlus
+PRT011:Coolant:20.0:60:CoolFlow
+PRT012:Transmission Fluid:30.0:50:GearOil Ltd
+PRT013:Headlight Bulb:18.0:40:BrightLite
+PRT014:Alignment Kit:65.0:15:PrecisionAlign
+PRT015:Radiator:130.0:20:CoolCore
+PRT016:Exhaust Clamp:25.0:35:ExhaustWorks
+PRT017:Engine Mount:75.0:10:MountTech
+PRT018:Drive Belt:35.0:45:BeltMasters
+PRT019:Steering Fluid:12.0:60:HydroSteer
+PRT020:Transmission Filter:28.0:30:GearOil Ltd
+PRT800:Windshield:567.0:87:Dr.Glass
+:DoorHandle:765.0:8:KIA AUTO
+PRT001:Oil Filter:10.0:50:AutoParts Inc
+PRT002:Air Filter:15.0:30:AutoParts Inc
+PRT003:Brake Pads:60.0:25:BrakeCo
+PRT004:Spark Plug:8.0:100:SparkInc
+PRT005:Windshield Wiper:12.0:75:RainTech
+PRT006:Battery:120.0:20:PowerCell
+PRT007:Timing Belt:45.0:40:BeltMasters
+PRT008:Oxygen Sensor:85.0:30:SensorPro
+PRT009:Fuel Pump:95.0:25:FlowTech
+PRT010:Shock Absorber:75.0:35:SuspensionPlus
+PRT011:Coolant:20.0:60:CoolFlow
+PRT012:Transmission Fluid:30.0:50:GearOil Ltd
+PRT013:Headlight Bulb:18.0:40:BrightLite
+PRT014:Alignment Kit:65.0:15:PrecisionAlign
+PRT015:Radiator:130.0:20:CoolCore
+PRT016:Exhaust Clamp:25.0:35:ExhaustWorks
+PRT017:Engine Mount:75.0:10:MountTech
+PRT018:Drive Belt:35.0:45:BeltMasters
+PRT019:Steering Fluid:12.0:60:HydroSteer
+PRT020:Transmission Filter:28.0:30:GearOil Ltd
+PRT001:Oil Filter:10.0:50:AutoParts Inc
+PRT002:Air Filter:15.0:30:AutoParts Inc
+PRT003:Brake Pads:60.0:25:BrakeCo
+PRT004:Spark Plug:8.0:100:SparkInc
+PRT005:Windshield Wiper:12.0:75:RainTech
+PRT006:Battery:120.0:20:PowerCell
+PRT007:Timing Belt:45.0:40:BeltMasters
+PRT008:Oxygen Sensor:85.0:30:SensorPro
+PRT009:Fuel Pump:95.0:25:FlowTech
+PRT010:Shock Absorber:75.0:35:SuspensionPlus
+PRT011:Coolant:20.0:60:CoolFlow
+PRT012:Transmission Fluid:30.0:50:GearOil Ltd
+PRT013:Headlight Bulb:18.0:40:BrightLite
+PRT014:Alignment Kit:65.0:15:PrecisionAlign
+PRT015:Radiator:130.0:20:CoolCore
+PRT016:Exhaust Clamp:25.0:35:ExhaustWorks
+PRT017:Engine Mount:75.0:10:MountTech
+PRT018:Drive Belt:35.0:45:BeltMasters
+PRT019:Steering Fluid:12.0:60:HydroSteer
+PRT020:Transmission Filter:28.0:30:GearOil Ltd
+PRT800:Windshield:567.0:87:Dr.Glass
+PRT001:Oil Filter:10.0:50:AutoParts Inc
+PRT002:Air Filter:15.0:30:AutoParts Inc
+PRT003:Brake Pads:60.0:25:BrakeCo
+PRT004:Spark Plug:8.0:100:SparkInc
+PRT005:Windshield Wiper:12.0:75:RainTech
+PRT006:Battery:120.0:20:PowerCell
+PRT007:Timing Belt:45.0:40:BeltMasters
+PRT008:Oxygen Sensor:85.0:30:SensorPro
+PRT009:Fuel Pump:95.0:25:FlowTech
+PRT010:Shock Absorber:75.0:35:SuspensionPlus
+PRT011:Coolant:20.0:60:CoolFlow
+PRT012:Transmission Fluid:30.0:50:GearOil Ltd
+PRT013:Headlight Bulb:18.0:40:BrightLite
+PRT014:Alignment Kit:65.0:15:PrecisionAlign
+PRT015:Radiator:130.0:20:CoolCore
+PRT016:Exhaust Clamp:25.0:35:ExhaustWorks
+PRT017:Engine Mount:75.0:10:MountTech
+PRT018:Drive Belt:35.0:45:BeltMasters
+PRT019:Steering Fluid:12.0:60:HydroSteer
+PRT020:Transmission Filter:28.0:30:GearOil Ltd
+PRT001:Oil Filter:10.0:50:AutoParts Inc
+PRT002:Air Filter:15.0:30:AutoParts Inc
+PRT003:Brake Pads:60.0:25:BrakeCo
+PRT004:Spark Plug:8.0:100:SparkInc
+PRT005:Windshield Wiper:12.0:75:RainTech
+PRT006:Battery:120.0:20:PowerCell
+PRT007:Timing Belt:45.0:40:BeltMasters
+PRT008:Oxygen Sensor:85.0:30:SensorPro
+PRT009:Fuel Pump:95.0:25:FlowTech
+PRT010:Shock Absorber:75.0:35:SuspensionPlus
+PRT011:Coolant:20.0:60:CoolFlow
+PRT012:Transmission Fluid:30.0:50:GearOil Ltd
+PRT013:Headlight Bulb:18.0:40:BrightLite
+PRT014:Alignment Kit:65.0:15:PrecisionAlign
+PRT015:Radiator:130.0:20:CoolCore
+PRT016:Exhaust Clamp:25.0:35:ExhaustWorks
+PRT017:Engine Mount:75.0:10:MountTech
+PRT018:Drive Belt:35.0:45:BeltMasters
+PRT019:Steering Fluid:12.0:60:HydroSteer
+PRT020:Transmission Filter:28.0:30:GearOil Ltd
+PRT800:Windshield:567.0:87:Dr.Glass
+:DoorHandle:765.0:8:KIA AUTO
+PRT903:teSTER:876.0:8:idk

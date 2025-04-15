@@ -55,6 +55,9 @@ public class AddPart extends javax.swing.JFrame {
 
         jLabel1.setText("Part ID");
 
+        //partID.setEditable(false);
+        //partID.setEnabled(false);
+
         jLabel2.setText("Name");
 
         jLabel3.setText("Price");
@@ -167,7 +170,7 @@ public class AddPart extends javax.swing.JFrame {
         String Supplier = supplier.getText().trim();
 
         Part p = new Part(partId, Name, Price, qty, Supplier);
-        Inventory inventory = new Inventory("inventory.txt");
+        Inventory inventory = new Inventory("parts.txt");
         inventory.addPart(p);
         
     }

@@ -16,10 +16,14 @@ class Inventory {
     }
 
     public Inventory(String filePath) {
+        this.parts = new ArrayList<>();
+        this.inventoryFile = new File (filePath);
+        readData(inventoryFile);
 
     }
 
     public Inventory() {
+        this.parts = new ArrayList<>();
     }
 
     public List<Part> getParts() { return parts; }
