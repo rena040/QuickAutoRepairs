@@ -6,13 +6,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-class Customer {
+public class Customer {
     private String customerId;
     private String name;
     private String phoneNumber;
     private List<Appointment> appointments;
     private List<Service> services;
     private LoyaltyCard loyaltyCard;
+    private int stamps;
 
     static File CustFile = new File("customer.txt");
     List<Customer> customersList = new ArrayList<>();
@@ -25,13 +26,12 @@ class Customer {
         this.phoneNumber = phoneNumber;
         this.appointments = new ArrayList<>();
         this.services = new ArrayList<>();
-        LoyaltyCard lc =  new LoyaltyCard(customerId, customerId, "defaultValue"); // Replace null with a valid value
-        this.loyaltyCard = lc; // Initialize loyalty card with customerId
+        this.stamps = 0; // Default stamps to 0
     }
 
-    public Customer(String customerId, String name, String phoneNumber, String dummyapt, String dummyService, String dummyLoyaltyCard) {
+    public Customer(String customerId, String name, String phoneNumber, String stamps) {
         this(customerId, name, phoneNumber);
-        
+        this.stamps = Integer.parseInt(stamps);
     }
 
     public String getCustomerId() { return customerId; }
@@ -40,34 +40,44 @@ class Customer {
     public List<Appointment> getAppointments() { return appointments; }
     public List<Service> getServices() { return services; }
     public LoyaltyCard getLoyaltyCard() { return loyaltyCard; }
+    public int getStamps() { return stamps; }
 
     public void setLoyaltyCard(LoyaltyCard loyaltyCard) { this.loyaltyCard = loyaltyCard; }
+    public void setStamps(int stamps) { this.stamps = stamps; }
+
     public void addAppointment(Appointment appointment) { 
         appointments.add(appointment); 
-        this.loyaltyCard.addStamp(); // Add a stamp for each appointment
+        this.stamps++; // Increment stamps for each appointment
         checkForDiscount();
     }
+
     public void addService(Service service) { services.add(service); }
 
     private void checkForDiscount() {
-        if (this.loyaltyCard.getStamps() >= 8) {
-            this.loyaltyCard.setDiscountAvailable(10.0); // 10% discount
+        if (this.stamps >= 8) {
+            if (this.loyaltyCard != null) {
+                this.loyaltyCard.setDiscountAvailable(10.0); // 10% discount
+            }
         }
     }
 
     @Override
     public String toString() {
-        return customerId + ":" + name + ":" + phoneNumber + ":" + appointments + ":" + services + ":" + loyaltyCard;
+        return customerId + ":" + name + ":" + phoneNumber + ":" + 
+               appointments.size() + ":" + services.size() + ":" + stamps;
     }
 
     public void readData(File filename) {
         try (Scanner customerFile = new Scanner(filename)) {
             while (customerFile.hasNext()) {
                 String[] data = customerFile.nextLine().split(":");
-                Customer p = new Customer(data[0], data[1], data[2]);
-                customersList.add(p);
+                if (data.length >= 6) { // Ensure the line has enough fields
+                    Customer p = new Customer(data[0], data[1], data[2], data[5]);
+                    customersList.add(p);
+                }
             }
         } catch (IOException ioe) {
+            System.out.println("Error reading customer data: " + ioe.getMessage());
         }
     }
 
@@ -81,11 +91,11 @@ class Customer {
                 file.createNewFile();
             }
 
-            try (PrintWriter pw = new PrintWriter(new FileWriter(file, true))) { // 'true' allows appending
+            try (PrintWriter pw = new PrintWriter(new FileWriter(file))) { // Overwrite file
                 for (Customer customer : customers) {
                     pw.println(customer.toString());
                 }
-                System.out.println("Data appended to file: " + file.getAbsolutePath());
+                System.out.println("Data written to file: " + file.getAbsolutePath());
             }
         } catch (IOException e) {
             System.out.println("An error occurred while writing to the file.");
@@ -95,7 +105,7 @@ class Customer {
 
     public void addCust(Customer p) {
         customersList.add(p);
-        writeToFile(CustFile, customersList);  // Append the updated customer list to the file
+        writeToFile(CustFile, customersList);  // Overwrite the file with the updated customer list
     }
 
     public static String generateNextCustomerId() {

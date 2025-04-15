@@ -1,7 +1,7 @@
-
-
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -124,26 +124,48 @@ public class CustomerMenu extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "No upcoming appointments found.");
         } else {
             StringBuilder appointmentDetails = new StringBuilder();
-            appointmentDetails.append("You have ").append(matchedAppointments.size()).append(" upcoming appointments:\n\n");
+            int upcomingCount = 0;
 
             for (Appointment appointment : matchedAppointments) {
-                if (appointment.getStatus().equals("Completed")) {
-                    continue; 
+                if (!appointment.getStatus().equalsIgnoreCase("Completed") &&
+                    !appointment.getStatus().equalsIgnoreCase("Cancelled")) {
+                    upcomingCount++;
                 }
-                appointmentDetails.append("Appointment ID: ").append(appointment.getAppointmentId()).append("\n")
-                                  .append("Customer ID: ").append(appointment.getCustomerId()).append("\n")
-                                  .append("Mechanic ID: ").append(appointment.getMechanicId()).append("\n")
-                                  .append("Vehicle Name: ").append(appointment.getVehicleName()).append("\n")
-                                  .append("Appointment Date: ").append(appointment.getAppointmentDate()).append("\n")
-                                  .append("Appointment Time: ").append(appointment.getAppointmentTime()).append("\n")
-                                  .append("Service: ").append(appointment.getService()).append("\n")
-                                  .append("Status: ").append(appointment.getStatus()).append("\n")
-                                  .append("Paid: ").append(appointment.isPaid() ? "Yes" : "No").append("\n")
-                                  .append("Draft Amount: $").append(String.format("%.2f", appointment.getDraft())).append("\n")
-                                  .append("----------------------------------------\n");
             }
 
-            javax.swing.JOptionPane.showMessageDialog(this, appointmentDetails.toString(), "Upcoming Appointments", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            if (upcomingCount == 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "No upcoming appointments found.");
+                return;
+            }
+
+            appointmentDetails.append("You have ").append(upcomingCount).append(" upcoming appointments:\n\n");
+
+            for (Appointment appointment : matchedAppointments) {
+                if (!appointment.getStatus().equalsIgnoreCase("Completed") &&
+                    !appointment.getStatus().equalsIgnoreCase("Cancelled")) {
+                    appointmentDetails.append("Appointment ID: ").append(appointment.getAppointmentId()).append("\n")
+                                      .append("Customer ID: ").append(appointment.getCustomerId()).append("\n")
+                                      .append("Mechanic ID: ").append(appointment.getMechanicId()).append("\n")
+                                      .append("Vehicle Name: ").append(appointment.getVehicleName()).append("\n")
+                                      .append("Appointment Date: ").append(appointment.getAppointmentDate()).append("\n")
+                                      .append("Appointment Time: ").append(appointment.getAppointmentTime()).append("\n")
+                                      .append("Service: ").append(appointment.getService()).append("\n")
+                                      .append("Status: ").append(appointment.getStatus()).append("\n")
+                                      .append("Paid: ").append(appointment.isPaid() ? "Yes" : "No").append("\n")
+                                      .append("Draft Amount: $").append(String.format("%.2f", appointment.getDraft())).append("\n")
+                                      .append("----------------------------------------\n");
+                }
+            }
+
+            JTextArea textArea = new JTextArea(appointmentDetails.toString());
+            textArea.setEditable(false);
+            textArea.setLineWrap(true);
+            textArea.setWrapStyleWord(true);
+
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            scrollPane.setPreferredSize(new java.awt.Dimension(500, 400));
+
+            javax.swing.JOptionPane.showMessageDialog(this, scrollPane, "Upcoming Appointments", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
     }
 

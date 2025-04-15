@@ -234,20 +234,33 @@ class Service {
     }
 
     public boolean completeService() {
-        if (deductUsedPartsFromInventory()) {
-            System.out.println("Service completed and parts deducted from inventory");
-            return true;
-        } else {
-            System.out.println("Failed to complete service - insufficient parts in inventory");
+        // First check if all parts are available
+        List<String> availabilityMessages = checkPartAvailability();
+        if (!availabilityMessages.isEmpty()) {
+            System.out.println("Cannot complete service - parts issues:");
+            availabilityMessages.forEach(System.out::println);
             return false;
         }
+
+        // Deduct parts from inventory
+        if (!deductUsedPartsFromInventory()) {
+            System.out.println("Failed to deduct parts from inventory");
+            return false;
+        }
+
+        System.out.println("Service completed successfully");
+        return true;
     }
+
     public List<String> checkPartAvailability() {
         List<String> messages = new ArrayList<>();
         if (inventory == null) {
             messages.add("Inventory system not available");
             return messages;
         }
+        
+        // Refresh inventory data from file
+        inventory.readData(inventory.inventoryFile);
         
         for (int i = 0; i < partIdsUsed.size(); i++) {
             Part part = inventory.findPart(partIdsUsed.get(i));

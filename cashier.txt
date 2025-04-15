@@ -8,3 +8,5 @@ CSH007:Grace Hall:39.0:18.0
 CSH008:Henry Young:37.5:17.0
 CSH009:Ivy King:40.0:16.5
 CSH010:Jack Scott:35.0:20.5
+CSH011:Karena Gayle:35.0:15.0
+CSH012:Justin Moo:10.0:10.0

@@ -6,7 +6,7 @@ import java.util.Scanner;
 class Inventory {
     private List<Part> parts;
     private String storageLocation;
-    private File inventoryFile;
+    public File inventoryFile;
 
     public Inventory(String storageLocation, String filePath) {
         this.storageLocation = storageLocation;

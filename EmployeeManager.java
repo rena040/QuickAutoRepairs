@@ -26,6 +26,7 @@ public class EmployeeManager extends javax.swing.JFrame {
         UIStyle.styleButton(jButton3);
         UIStyle.styleButton(jButton4);
         UIStyle.styleButton(jButton5);
+        UIStyle.styleButton(viewMechanicsButton);
     }
 
 
@@ -39,6 +40,7 @@ public class EmployeeManager extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        viewMechanicsButton = new javax.swing.JButton(); // New button for viewing all mechanics
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,6 +88,13 @@ public class EmployeeManager extends javax.swing.JFrame {
             }
         });
 
+        viewMechanicsButton.setText("View Mechanics");
+        viewMechanicsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewMechanicsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -96,7 +105,8 @@ public class EmployeeManager extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addComponent(hourlRate, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(viewMechanicsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)) // Add new button here
                 .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
@@ -118,6 +128,8 @@ public class EmployeeManager extends javax.swing.JFrame {
                 .addComponent(hourlRate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(viewMechanicsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE) // Add new button here
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -209,6 +221,12 @@ public class EmployeeManager extends javax.swing.JFrame {
         em.setLocationRelativeTo(null);
     }
 
+    private void viewMechanicsButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        ViewAllMechanic vm = new ViewAllMechanic();
+        vm.setVisible(true);
+        this.dispose();
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -245,5 +263,6 @@ public class EmployeeManager extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton viewMechanicsButton;
     private javax.swing.JPanel jPanel1;
 }

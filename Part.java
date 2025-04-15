@@ -13,8 +13,7 @@ class Part {
         this.supplier = supplier;
     }
 
-    public Part() {
-    }
+    public Part() {}
 
     public String getPartId() { return partId; }
     public String getName() { return name; }
@@ -42,5 +41,4 @@ class Part {
         String supplier = parts[4];
         return new Part(partId, name, price, quantityInStock, supplier);
     }
-    
 }

@@ -27,6 +27,14 @@ class LoyaltyCard {
         this.stamps++;
     }
 
+    public void setStamps(int stamps) {
+        if (stamps >= 0) {
+            this.stamps = stamps;
+        } else {
+            throw new IllegalArgumentException("Stamps cannot be negative.");
+        }
+    }
+
     public boolean hasEnoughStamps() {
         return this.stamps >= 8;
     }

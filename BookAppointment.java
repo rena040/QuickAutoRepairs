@@ -1,9 +1,8 @@
-
-
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  *
@@ -256,45 +255,55 @@ public class BookAppointment extends javax.swing.JFrame {
         
     }
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         Appointment app = new Appointment();
         String Custid = custId.getText();
-        String Appid = AppID.getText(); 
+        String Appid = AppID.getText();
         String appDate = AppDate.getText();
         String Vehicle = vehicle.getText();
         String appTime = apptime.getText();
-        
-        if (Custid.isEmpty() || Appid.isEmpty() || appDate.isEmpty() || Vehicle.isEmpty() || appDate.equals("YYYY-MM-DD")|| appTime.isEmpty()) {
+
+        if (Custid.isEmpty() || Appid.isEmpty() || appDate.isEmpty() || Vehicle.isEmpty() || appDate.equals("YYYY-MM-DD") || appTime.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.");
             return;
-        } else {
-            String selectedMechanic = mechanic.getSelectedItem().toString();
-            String mechanicId = selectedMechanic.substring(selectedMechanic.indexOf("(") + 1, 
-                                        selectedMechanic.indexOf(")"));
-            
-            String selectedService = services.getSelectedItem().toString();
-            String serviceId = selectedService.substring(selectedService.indexOf("(") + 1, 
-                                        selectedService.indexOf(")"));
+        }
 
-            if (!app.checkAvailability(mechanicId, appDate, appTime)) {
-                JOptionPane.showMessageDialog(this, "The selected mechanic is not available at the chosen date and time.");
+        // Check if the date is valid and not in the past
+        try {
+            LocalDate appointmentDate = LocalDate.parse(appDate);
+            if (appointmentDate.isBefore(LocalDate.now())) {
+                JOptionPane.showMessageDialog(this, "The appointment date has already passed. Please select a valid date.");
                 return;
             }
-            
-            Appointment newAppointment = new Appointment();
-            newAppointment.readData(newAppointment.AFile);
-            newAppointment.BookAppointment(Appid, Custid, mechanicId, Vehicle, appDate, appTime, serviceId); // Fixed method call
-            newAppointment.addAppointment(newAppointment);
-
-            newAppointment.setDraft(newAppointment.getDraft() + Service.findServiceById(serviceId).calculateTotalCost(Mechanic.searchMechanicById(mechanicId).getPayRate()));
-            
-            BookAppointment ba = new BookAppointment();
-            this.dispose();
-            ba.setCustomerId(Custid);
-            ba.setVisible(true);
-            
-            JOptionPane.showMessageDialog(this, "Appointment booked successfully!\nAppointment ID: " + Appid);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Invalid date format. Please use YYYY-MM-DD.");
+            return;
         }
+
+        String selectedMechanic = mechanic.getSelectedItem().toString();
+        String mechanicId = selectedMechanic.substring(selectedMechanic.indexOf("(") + 1, selectedMechanic.indexOf(")"));
+
+        String selectedService = services.getSelectedItem().toString();
+        String serviceId = selectedService.substring(selectedService.indexOf("(") + 1, selectedService.indexOf(")"));
+
+        if (!app.checkAvailability(mechanicId, appDate, appTime)) {
+            JOptionPane.showMessageDialog(this, "The selected mechanic is not available at the chosen date and time.");
+            return;
+        }
+
+        Appointment newAppointment = new Appointment();
+        newAppointment.readData(newAppointment.AFile);
+        newAppointment.BookAppointment(Appid, Custid, mechanicId, Vehicle, appDate, appTime, serviceId);
+        newAppointment.addAppointment(newAppointment);
+
+        newAppointment.setDraft(newAppointment.getDraft() + Service.findServiceById(serviceId).calculateTotalCost(Mechanic.searchMechanicById(mechanicId).getPayRate()));
+
+        BookAppointment ba = new BookAppointment();
+        this.dispose();
+        ba.setCustomerId(Custid);
+        ba.setVisible(true);
+
+        JOptionPane.showMessageDialog(this, "Appointment booked successfully!\nAppointment ID: " + Appid);
     }
 
     private void AppDateActionPerformed(java.awt.event.ActionEvent evt) {

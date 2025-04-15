@@ -1,4 +1,3 @@
-
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -23,22 +22,8 @@ public class PaymentProcessing extends javax.swing.JFrame {
         chkApplyDiscount.setSelected(false);
         receiptTextArea.setText("");
         
-        Service service = Service.findServiceById(appointment.getService());
-        if (service != null) {
-            List<String> availabilityMessages = service.checkPartAvailability();
-            if (!availabilityMessages.isEmpty()) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("Parts availability issues:\n");
-                for (String msg : availabilityMessages) {
-                    sb.append("- ").append(msg).append("\n");
-                }
-                lblDiscountInfo.setText(sb.toString());
-            } else {
-                lblDiscountInfo.setText("All parts available");
-            }
-        }
         
-        if (selectedCustomer != null && selectedCustomer.getLoyaltyCard().getStamps() >= 8) {
+        if (selectedCustomer != null && selectedCustomer.getStamps() >= 8) {
             lblDiscountInfo.setText(lblDiscountInfo.getText() + " | Eligible for 10% discount (8+ points)");
         }
     }
@@ -60,7 +45,7 @@ public class PaymentProcessing extends javax.swing.JFrame {
         initComponents();
         applyStyles();
         pack();
-        setLocationRelativeTo(null); // Center the form on the screen
+        setLocationRelativeTo(null); 
     }
 
     private void applyStyles() {
@@ -153,21 +138,21 @@ public class PaymentProcessing extends javax.swing.JFrame {
 
         appointmentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Appointment ID", "Vehicle", "Date", "Customer ID"
+                "Appointment ID", "Vehicle", "Date", "Customer ID", "Paid"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -282,7 +267,7 @@ public class PaymentProcessing extends javax.swing.JFrame {
                             .addGroup(paymentDetailsPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(137, 137, 137)
-                                .addComponent(lblDiscountInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblDiscountInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, Short.MAX_VALUE))
                             .addGroup(paymentDetailsPanelLayout.createSequentialGroup()
                                 .addGroup(paymentDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(paymentDetailsPanelLayout.createSequentialGroup()
@@ -439,7 +424,8 @@ public class PaymentProcessing extends javax.swing.JFrame {
                     apt.getAppointmentId(),
                     apt.getVehicleName(),
                     apt.getAppointmentDate(),
-                    apt.getCustomerId()
+                    apt.getCustomerId(),
+                    apt.isPaid() 
                 });
             }
             
@@ -475,54 +461,66 @@ public class PaymentProcessing extends javax.swing.JFrame {
                 "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
         Double amountPaid = Double.parseDouble(JOptionPane.showInputDialog(this, "Enter amount paid by customer: "));
-        
+
         if (amountPaid <= 0) {
             JOptionPane.showMessageDialog(this, "Please enter a valid amount", 
                 "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
-        }else if (amountPaid < selectedAppointment.getDraft()) {
+        }
+
+        double finalAmount = selectedAppointment.getDraft(); 
+
+        if (chkApplyDiscount.isSelected() && selectedCustomer != null && selectedCustomer.getStamps() >= 8) {
+            finalAmount = finalAmount * 0.9; 
+        }
+
+        if (amountPaid < finalAmount) {
             JOptionPane.showMessageDialog(this, "Amount paid is less than the due amount", 
                 "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
-        }else{
-            try {
-                boolean applyDiscount = chkApplyDiscount.isSelected();
-                String receipt = paymentHandler.processPayment(
-                    selectedAppointment.getAppointmentId(),
-                    txtCashierId.getText().trim(),
-                    applyDiscount
-                );
-    
-                String id = txtAppointmentId.getText().trim();
-                
-                Appointment appointment = paymentHandler.getAppointmentById(id);
-                if (appointment != null) {
-                    appointment.completeService();
-                }
-
-                double finalAmount = selectedAppointment.getDraft();
-                if (applyDiscount && selectedCustomer != null && selectedCustomer.getLoyaltyCard().getStamps() >= 8) {
-                    finalAmount = finalAmount * 0.9;
-                }
-                
-                double change = amountPaid - finalAmount;
-                
-                receipt += "\n\nPayment Details:\n";
-                receipt += "Amount Paid: $" + amountPaid + "\n";
-                receipt += "Final Amount: $" + finalAmount + "\n";
-                receipt += "Change: $" + change + "\n"; 
-                receiptTextArea.setText(receipt);
-                JOptionPane.showMessageDialog(this, "Payment processed successfully", 
-                    "Success", JOptionPane.INFORMATION_MESSAGE);
-                
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error processing payment: " + e.getMessage(), 
-                    "Error", JOptionPane.ERROR_MESSAGE);
-            }
         }
-    
 
+        try {
+            boolean applyDiscount = chkApplyDiscount.isSelected();
+            String receipt = paymentHandler.processPayment(
+                selectedAppointment.getAppointmentId(),
+                txtCashierId.getText().trim(),
+                applyDiscount
+            );
+
+            String id = txtAppointmentId.getText().trim();
+
+            Appointment appointment = paymentHandler.getAppointmentById(id);
+            if (appointment != null) {
+                appointment.completeService(); 
+                appointment.setPaid(true); 
+
+                
+                for (int i = 0; i < appointmentTable.getRowCount(); i++) {
+                    if (appointmentTable.getValueAt(i, 0).equals(appointment.getAppointmentId())) {
+                        appointmentTable.setValueAt(true, i, 4); 
+                        break;
+                    }
+                }
+            }
+
+            double change = amountPaid - finalAmount;
+
+            receipt += "\n\nPayment Details:\n";
+            receipt += "Amount Paid: $" + amountPaid + "\n";
+            receipt += "Final Amount: $" + finalAmount + "\n";
+            receipt += "Change: $" + change + "\n"; 
+            receiptTextArea.setText(receipt);
+
+            JOptionPane.showMessageDialog(this, "Payment processed successfully", 
+                "Success", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error processing payment: " + e.getMessage(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void selectAppointActionPerformed(java.awt.event.ActionEvent evt) {
@@ -532,31 +530,45 @@ public class PaymentProcessing extends javax.swing.JFrame {
                 "Selection Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
         
+        boolean isPaid = (boolean) appointmentTable.getValueAt(selectedRow, 4); 
+        if (isPaid) {
+            JOptionPane.showMessageDialog(this, "This appointment has already been paid for and cannot be selected.", 
+                "Selection Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         String appointmentId = appointmentTable.getValueAt(selectedRow, 0).toString();
         Appointment appointment = paymentHandler.processPaymentByAppointmentId(appointmentId);
-        
+
         if (appointment != null) {
             displayAppointmentDetails(appointment);
             paymentDetailsPanel.setVisible(true);
             mainTabbedPane.setSelectedComponent(paymentDetailsPanel);
         }
     }
-
     private void chkApplyDiscountActionPerformed(java.awt.event.ActionEvent evt) {
-            if (chkApplyDiscount.isSelected() && selectedCustomer != null) {
-                if (selectedCustomer.getLoyaltyCard().getStamps() >= 8) {
-                    lblDiscountInfo.setText("10% discount will be applied");
-                } else {
-                    lblDiscountInfo.setText("Not enough loyalty points (8 required)");
-                    chkApplyDiscount.setSelected(false);
-                }
-            } else {
-                lblDiscountInfo.setText("No discount available");
-            }
+        if (selectedAppointment == null) return;
         
-    }
+        if (chkApplyDiscount.isSelected() && selectedCustomer != null) {
+            if (selectedCustomer.getStamps() >= 8) {
+                lblDiscountInfo.setText("10% discount will be applied");
 
+                txtAmount.setText(String.format("$%.2f", selectedAppointment.getDraft() * 0.9));
+                Double finalAmount = selectedAppointment.getDraft() * 0.9;
+
+            } else {
+                lblDiscountInfo.setText("Not enough loyalty points (8 required)");
+                chkApplyDiscount.setSelected(false);
+                txtAmount.setText(String.format("$%.2f", selectedAppointment.getDraft()));
+                Double finalAmount = selectedAppointment.getDraft();
+            }
+        } else {
+            lblDiscountInfo.setText("");
+            txtAmount.setText(String.format("$%.2f", selectedAppointment.getDraft()));
+        }
+    }
     private void backbuttonActionPerformed(java.awt.event.ActionEvent evt) {
         CashierMenu cm = new CashierMenu();
         cm.setVisible(true);

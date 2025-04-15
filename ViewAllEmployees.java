@@ -1,5 +1,3 @@
-
-
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
@@ -38,14 +36,15 @@ public class ViewAllEmployees extends javax.swing.JFrame {
         Cashier.readData();
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0); // Clear existing rows
+        model.setRowCount(0);
 
         for (Administrator admin : adminManager.admins) {
             model.addRow(new Object[]{
                 admin.getAdminId(),
                 admin.getName(),
                 "Administrator",
-                "$1500/hour"
+                "$1500/hour",
+                "$" + (1500 * 40) // Assuming 40 hours per week
             });
         }
 
@@ -55,16 +54,19 @@ public class ViewAllEmployees extends javax.swing.JFrame {
                 mechanic.getMechanicId(),
                 mechanic.getName(),
                 "Mechanic (" + mechanic.getSpecialization() + ")",
-                "$" + mechanic.getPayRate() + "/hour"
+                "$" + mechanic.getPayRate() + "/hour",
+                "$" + (mechanic.getPayRate() * 40) // Assuming 40 hours per week
             });
         }
+
         List<Cashier> cashiers = Cashier.getAllCashiers();
         for (Cashier cashier : cashiers) {
             model.addRow(new Object[]{
                 cashier.getCashierId(),
                 cashier.getName(),
                 "Cashier",
-                "$" + cashier.getPayRate() + "/hour"
+                "$" + cashier.getPayRate() + "/hour",
+                "$" + (cashier.getPayRate() * 40) // Assuming 40 hours per week
             });
         }
     }
@@ -83,20 +85,20 @@ public class ViewAllEmployees extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Employee ID", "Name", "Title", "Hourly Rate"
+                "Employee ID", "Name", "Title", "Hourly Rate", "Weekly Pay"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

@@ -10,17 +10,17 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Appointment {
+public class Appointment {
     private String appointmentId;
     private String customerId;
     private String mechanicId;
     private String vehicleName;
     private String appointmentDate;
-    private String appointmentTime;  // New field for time
+    private String appointmentTime; 
     private String service;
     private String status;
     private double draft;
-    private boolean paid;  // New field
+    private boolean paid;  
 
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
